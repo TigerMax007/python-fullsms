@@ -17,7 +17,7 @@ def parse_config(section='settings', config_filename="~/.fullsms"):
         (default: 'settings')
     config_filename : str
         the path to and name of the config file
-        (default: '~/.fullssms')
+        (default: '~/.fullsms')
 
     Returns
     -------
