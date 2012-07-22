@@ -9,15 +9,40 @@ import options
 
 BASE_URL = "https://www.fullsms.de/gw/"
 
+
 USER     = 'user'
 PASSWORD = 'password'
 GATEWAY  = 'gateway'
 RECEIVER = 'receiver'
 SENDER   = 'sender'
-
 SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
 
+GATEWAYS = dict(('_'+str(g), g) for g in [11, 26, 31, 12, 22, 27, 32])
+for key, value in GATEWAYS.items():
+    globals()[key] = value
+
+DEAFULTS = dict((zip(SETTINGS, [None] *len(SETTINGS))))
+DEAFULTS[GATEWAY] = _22
+
 DEBUG = False
+
+SEND = 'send'
+CHECK = 'check'
+SUBS = [SEND, CHECK]
+optspec = """
+sms %s [-d] <message...>
+--
+ general program options
+d,debug     activate debugging
+h,help      display help and exit
+ for all subcommands
+u,user=     the fullsms.de username
+p,password= the fullsms.de password
+ for 'send' only
+g,gateway=  the gateway to use
+r,receiver= the person to send the message to
+s,sender=   the sender to use
+""" % ('[' + ' | '.join(SUBS) + ']')
 
 def warn(message):
     print "Warning: %s" % message
@@ -126,19 +151,6 @@ def set_setting(setting, conf, cli):
     return val
 
 if __name__ == '__main__':
-    send_ = 'send'
-    check_ = 'check'
-    subs = [send_, check_]
-    optspec = """
-    sms %s [-d] <message...>
-    --
-    d,debug     activate debugging
-    u,user=     the fullsms.de username
-    p,password= the fullsms.de password
-    g,gateway=  the gateway to use
-    r,receiver= the person to send the message to
-    s,sender=   the sender to use
-    """ % ('[' + ' | '.join(subs) + ']')
     parser = options.Options(optspec)
     (opt, flags, extra) = parser.parse(sys.argv[1:])
     if opt.debug:
@@ -147,11 +159,13 @@ if __name__ == '__main__':
     if not extra:
         parser.fatal('No subcommand given')
     cfs = parse_config()
-    user = set_setting('user', cfs, opt)
+    for s in SETTINGS:
+        locals()[s] = set_setting(s, cfs, opt)
+    print locals()
     sub = extra[0]
-    if sub not in subs:
+    if sub not in SUBS:
         options.fatal("invalid subcommand: " % sub)
-    elif sub == check_:
+    elif sub == CHECK:
         result = check(user, cfs['password'])
         if result is not None:
             print "The current balance for the account '%s' is: %s €" \
