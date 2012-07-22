@@ -120,7 +120,12 @@ def assemble_send_str(params):
 def assemble_check_str(params):
     return assemble_rest_call('konto.php', params)
 
-def send(user, password, gateway, receiver, sender, message):
+def send(user=None,
+        password=None,
+        gateway=None,
+        receiver=None,
+        sender=None,
+        message=None):
     parameters = {
             'user': user,
             'passwort': password,
@@ -165,11 +170,14 @@ if __name__ == '__main__':
     if not extra:
         parser.fatal('No subcommand given')
     cfs = parse_config()
+    params = {}
     for s in SETTINGS:
-        locals()[s] = set_setting(s, cfs, opt)
+        r = set_setting(s, cfs, opt)
+        locals()[s] = params[s] = r
     if user is None or password is None:
         fatal('No username or password')
     sub = extra[0]
+    mess = ' '.join(extra[1:])
     if sub not in SUBS:
         options.fatal("invalid subcommand: " % sub)
     elif sub == CHECK:
@@ -179,3 +187,7 @@ if __name__ == '__main__':
             % (user, result)
         else:
             fatal("Error checking balance")
+    elif sub == SEND:
+        params['message'] = mess
+        result = send(**params)
+        print result
