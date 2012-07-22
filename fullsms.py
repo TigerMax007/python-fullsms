@@ -75,6 +75,10 @@ def warn(message):
 def fatal(message):
     parser.fatal(message)
 
+def error(message):
+    print "Error: %s" % message
+    sys.exit(2)
+
 def debug(message):
     if DEBUG:
         print "Debug: %s" % message
@@ -205,11 +209,12 @@ if __name__ == '__main__':
 
     if sub == CHECK:
         code, result = check(user, password)
-        if code == 200:
+        if ',' in result:
             print "The current balance for the account '%s' is: %s €" \
             % (user, result)
         else:
-            fatal("Error checking balance")
+            result = int(result)
+            error("Failed checking, error code: %d - %s" % (result, CODES[result]))
     elif sub == SEND:
         mess = ' '.join(extra[1:])
         if len(mess) == 0:
@@ -224,4 +229,4 @@ if __name__ == '__main__':
         if result == 200:
             debug('Send successful!')
         else:
-            fatal('Error code: %d - %s' % (result, CODES[result]))
+            error('Failed sending, error code: %d - %s' % (result, CODES[result]))
