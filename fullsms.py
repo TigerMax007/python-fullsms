@@ -7,6 +7,46 @@ import options
 
 BASE_URL = "https://www.fullsms.de/gw/"
 
+def parse_config(section='settings', config_filename="~/.fullsms"):
+    """ Parse a configuration file with app settings.
+
+    Parameters
+    ----------
+    section : str
+        the name of the config section where to look for settings
+        (default: 'settings')
+    config_filename : str
+        the path to and name of the config file
+        (default: '~/.fullssms')
+
+    Returns
+    -------
+    settings : dict
+        the settings, values for 'apikey', 'secret' and 'installid'
+
+    Raises
+    ------
+    IOError:
+        if config_filename does not exist
+    NoSectionError
+        if no section with name 'section' exists
+    NoOptionError
+        if any one of 'apikey', 'secret' and 'installid' does not exist
+
+    """
+    # use the config file if none given
+    if not config_filename:
+        config_filename = os.path.expanduser(config_filename)
+    # parse the config
+    cp = ConfigParser.RawConfigParser()
+    with open(config_filename) as fp:
+        cp.readfp(fp)
+    # convert to dict and return
+    # doing it this way, will raise exceptions if the section or option doesn't
+    # exist
+    return dict((setting, cp.get(section, setting))
+            for setting in SETTINGS)
+
 def assemble_rest_call(function, parameters):
     """ Create a URL suitable for making a REST call to fullsms.de
 
