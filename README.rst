@@ -1,18 +1,25 @@
 Description
 ===========
 
-A library and command line interface to the HTTP interface of ``fullsms.de``.
+A library and command line interface to the HTTP interface of `fullsms.de
+<http://fullsms.de>`_, which makes use of Avery Pennarun's excellent
+``options.py``.
 
 Example command line usage
 ==========================
 
 Send a text message::
 
-    $ fullsms send -r 012345678 "Hello honey, I'm home"
+    $ sms send -r 0123456789 "Hello honey, I'm home"
 
 Check account balance::
 
-    $ fullsms check
+    $ sms check
+    The current balance for the account 'MaxMusterman' is: 12.571 €
+
+For all available options, use::
+
+    $ sms -h
 
 Example library usage
 =====================
@@ -21,20 +28,35 @@ The ``python-fullsms`` can easily be used as a python module::
 
     >>> import fullsms
 
-    >>> fullsms.send(gateway=12, receiver=0123456789)
-    500 : 'OK'
+    >>> fullsms.send(user=MaxMusterman,
+                     password=maxmustermangeheim,
+                     gateway=21,
+                     receiver=0123456789,
+                     sender=0123456789,
+                     text="Hello honey, I'm home")
+    (200 : 'OK')
 
-    >>> fullsms.check()
-    Current Balance: 23,42 €
+    >>> fullsms.check(user=MaxMusterman, password=maxmustermangeheim)
+    The current balance for the account 'MaxMusterman' is: 12.571 €
 
 Example Config
 ==============
 
-Default settings can be stored in the file ``.fullsms``::
+Default settings can be stored in the file ``~/.fullsms``::
 
     [settings]
-        username = "Max Musterman"
-        passwort = maxmustermangeheim
-        default_gateway = 11
-        default_sender  = 0123456789
+    user     = MaxMusterman
+    password = maxmustermangeheim
+    gateway  = 11
+    sender   = 0123456789
+    receiver = 0123456789
 
+Author and Copyright
+====================
+
+* ``fullsms.py`` is © 2012 Valentin Haenel, under a 2-Clause BSD license
+* ``options.py`` is © 2010-2012 Avery Pennarun, under a 2-Clause BSD license
+
+``options.py`` is included verbatim in the file ``fullsms.py`` to make
+installation and usage so much easier. The copied code is clearly marked and
+the original copyright statement etc. is included as required by the licence.
