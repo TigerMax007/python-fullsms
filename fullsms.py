@@ -173,7 +173,7 @@ if __name__ == '__main__':
     if sub not in SUBS:
         options.fatal("invalid subcommand: " % sub)
     elif sub == CHECK:
-        result = check(user, cfs['password'])
+        result = check(user, password)
         if result is not None:
             print "The current balance for the account '%s' is: %s €" \
             % (user, result)
