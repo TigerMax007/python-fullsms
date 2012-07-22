@@ -63,6 +63,12 @@ def call(str_):
     file_like = urllib.urlopen(str_)
     return file_like.read()
 
+def assemble_send_str(params):
+    return assemble_rest_call('', params)
+
+def assemble_check_str(params):
+    return assemble_rest_call('konto.php', params)
+
 def send(user, password, gateway, receiver, sender, message):
     parameters = {
             'user': user,
@@ -74,9 +80,6 @@ def send(user, password, gateway, receiver, sender, message):
             }
     rest_str = assemble_rest_call('', parameters)
     return call(rest_str)
-
-def assemble_check_str(params):
-    return assemble_rest_call('konto.php', params)
 
 def check(user, password):
     params = {'user': user, 'passwort': password}
