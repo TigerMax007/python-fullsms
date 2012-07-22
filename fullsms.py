@@ -87,7 +87,9 @@ def check(user, password):
     return call(str_)
 
 if __name__ == '__main__':
-    subcommands = ['send', 'check']
+    send_ = 'send'
+    check_ = 'check'
+    subs = [send_, check_]
     optspec = """
     sms %s [opts] <message>
     --
@@ -96,16 +98,19 @@ if __name__ == '__main__':
     g,gateway= the gateway to use
     r,receiver= the person to send the message to
     s,sender= the sender to use
-    """ % ('[' + ' | '.join(subcommands) + ']')
+    """ % ('[' + ' | '.join(subs) + ']')
     o = options.Options(optspec)
     (opt, flags, extra) = o.parse(sys.argv[1:])
     cfs = parse_config()
-    if extra[0] not in ['check']:
-        options.fatal('invalid subcommand')
-    elif extra[0] == 'check':
+    user = cfs['user']
+    sub = extra[0]
+    if sub not in subs:
+        options.fatal("invalid subcommand: " % sub)
+    elif sub == check_:
         result = check(cfs['user'], cfs['password'])
         if result is not None:
-            return "The current balance for the account %s is: %s €" % (result 
+            print "The current balance for the account '%s' is: %s €" \
+            % (user, result)
         else:
             options.fatal("Error checking balance")
 
