@@ -76,7 +76,7 @@ def send(user, password, gateway, receiver, sender, message):
             'passwort': password,
             'typ': gateway,
             'handynr': receiver,
-            'absender': sende,
+            'absender': sender,
             'text': message
             }
     rest_str = assemble_rest_call('', parameters)
