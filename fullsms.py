@@ -49,7 +49,7 @@ def parse_config(section='settings', config_filename="~/.fullsms"):
     cp = ConfigParser.RawConfigParser()
     with open(config_filename) as fp:
         cp.readfp(fp)
-    sets = dict(cp.items('settings'))
+    sets = dict(cp.items(section))
     for key in sets.keys():
         if key not in SETTINGS:
             warn("Setting %s not recognized!")
