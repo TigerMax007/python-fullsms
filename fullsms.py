@@ -48,9 +48,13 @@ parser = options.Options(optspec)
 def warn(message):
     print "Warning: %s" % message
 
+def fatal(message):
+    parser.fatal(message)
+
 def debug(message):
     if DEBUG:
         print "Debug: %s" % message
+
 
 def parse_config(section='settings', config_filename="~/.fullsms"):
     """ Parse a configuration file with app settings.
@@ -161,7 +165,8 @@ if __name__ == '__main__':
     cfs = parse_config()
     for s in SETTINGS:
         locals()[s] = set_setting(s, cfs, opt)
-    print locals()
+    if user is None or password is None:
+        fatal('No username or password')
     sub = extra[0]
     if sub not in SUBS:
         options.fatal("invalid subcommand: " % sub)
@@ -171,5 +176,4 @@ if __name__ == '__main__':
             print "The current balance for the account '%s' is: %s €" \
             % (user, result)
         else:
-            parser.fatal("Error checking balance")
-
+            fatal("Error checking balance")
