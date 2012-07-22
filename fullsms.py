@@ -36,7 +36,6 @@ import sys
 import os
 import urllib
 import ConfigParser
-import options
 
 BASE_URL = "https://www.fullsms.de/gw/"
 
