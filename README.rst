@@ -5,7 +5,12 @@ A library and command line interface to the HTTP interface of `fullsms.de
 <http://fullsms.de>`_, which makes use of Avery Pennarun's excellent
 ``options.py``.
 
-Example command line usage
+Note: If you do not already have an account on ``fullsms.de``, please consider
+using the following link `https://www.fullsms.de/?ref=101584
+<https://www.fullsms.de/?ref=101584>`_ to register. This will credit the
+account of the author of ``fullsms.py`` with ``15,00 €``.
+
+Example command line usage.
 ==========================
 
 Send a text message::
