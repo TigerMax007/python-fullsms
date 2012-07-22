@@ -527,7 +527,8 @@ if __name__ == '__main__':
             % (user, result)
         else:
             result = int(result)
-            error("Failed checking, error code: %d - %s" % (result, CODES[result]))
+            error("Failed checking, error code: %d - %s"
+                    % (result, CODES[result]))
     elif sub == SEND:
         mess = ' '.join(extra[1:])
         if len(mess) == 0:
@@ -542,4 +543,5 @@ if __name__ == '__main__':
         if result == 200:
             debug('Send successful!')
         else:
-            error('Failed sending, error code: %d - %s' % (result, CODES[result]))
+            error('Failed sending, error code: %d - %s'
+                    % (result, CODES[result]))
