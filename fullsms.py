@@ -43,6 +43,7 @@ g,gateway=  the gateway to use
 r,receiver= the person to send the message to
 s,sender=   the sender to use
 """ % ('[' + ' | '.join(SUBS) + ']')
+parser = options.Options(optspec)
 
 def warn(message):
     print "Warning: %s" % message
@@ -151,7 +152,6 @@ def set_setting(setting, conf, cli):
     return val
 
 if __name__ == '__main__':
-    parser = options.Options(optspec)
     (opt, flags, extra) = parser.parse(sys.argv[1:])
     if opt.debug:
         DEBUG = True
