@@ -138,19 +138,28 @@ def check(user, password):
     return call(str_)
 
 def set_setting(setting, conf, cli):
-    val = None
-    try:
-        val = conf[setting]
-        debug("Value for '%s' found in conf file: '%s'" % (setting, val))
-    except KeyError:
-        pass
-    if cli[setting] is not None:
-        if val is not None:
-            debug("Value for '%s' found on command line overrides, conf file: '%s'"
-                    % (setting, val))
-        else:
-            debug("Value for '%s' found on command line: '%s'" % (setting, val))
-        val = cli[setting]
+    order = [('default',
+                lambda x: DEFAULTS[x] is not None,
+                lambda x: DEFAULTS[x]),
+             ('conf file',
+                lambda x: conf.has_key(x),
+                lambda x: conf[x]),
+             ('command line',
+                lambda x: cli[x] is not None,
+                lambda x: cli[x])
+            ]
+    prev, val = None, None
+    for desc, has, get in order:
+        if has(setting):
+            if val is not None:
+                val = get(setting)
+                debug("Value for '%s' found on %s, overrides %s: '%s'"
+                        % (setting, desc, prev, val))
+            else:
+                val = get(setting)
+                debug("Value for '%s' found in %s: '%s'"
+                        % (setting, desc, val))
+        prev = desc
     if val is None:
         warn("No value for '%s' found " % setting)
     return val
