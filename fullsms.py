@@ -17,8 +17,14 @@ SENDER   = 'sender'
 
 SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
 
+DEBUG = False
+
 def warn(message):
     print "Warning: %s" % message
+
+def debug(message):
+    if DEBUG:
+        print "Debug: %s" % message
 
 def parse_config(section='settings', config_filename="~/.fullsms"):
     """ Parse a configuration file with app settings.

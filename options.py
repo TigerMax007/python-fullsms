@@ -161,6 +161,7 @@ class Options:
         out = []
         lines = self.optspec.strip().split('\n')
         lines.reverse()
+        lines = [l.lstrip() for l in lines]
         first_syn = True
         while lines:
             l = lines.pop()
