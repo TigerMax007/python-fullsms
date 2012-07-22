@@ -240,7 +240,7 @@ if __name__ == '__main__':
 
     if sub == CHECK:
         code, result = check(user, password)
-        if ',' in result:
+        if '.' in result:
             print "The current balance for the account '%s' is: %s €" \
             % (user, result)
         else:
