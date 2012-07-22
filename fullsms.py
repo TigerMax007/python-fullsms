@@ -39,7 +39,6 @@ import ConfigParser
 
 BASE_URL = "https://www.fullsms.de/gw/"
 
-
 USER     = 'user'
 PASSWORD = 'password'
 GATEWAY  = 'gateway'
