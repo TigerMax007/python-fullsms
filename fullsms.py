@@ -9,6 +9,17 @@ import options
 
 BASE_URL = "https://www.fullsms.de/gw/"
 
+USER     = 'user'
+PASSWORD = 'password'
+GATEWAY  = 'gateway'
+RECEIVER = 'receiver'
+SENDER   = 'sender'
+
+SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
+
+def warn(message):
+    print "Warning: %s" % message
+
 def parse_config(section='settings', config_filename="~/.fullsms"):
     """ Parse a configuration file with app settings.
 
@@ -38,7 +49,11 @@ def parse_config(section='settings', config_filename="~/.fullsms"):
     cp = ConfigParser.RawConfigParser()
     with open(config_filename) as fp:
         cp.readfp(fp)
-    return dict(cp.items('settings'))
+    sets = dict(cp.items('settings'))
+    for key in sets.keys():
+        if key not in SETTINGS:
+            warn("Setting %s not recognized!")
+    return sets
 
 def assemble_rest_call(function, parameters):
     """ Create a URL suitable for making a REST call to fullsms.de
