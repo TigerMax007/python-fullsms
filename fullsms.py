@@ -112,19 +112,23 @@ if __name__ == '__main__':
     check_ = 'check'
     subs = [send_, check_]
     optspec = """
-    sms %s [opts] <message>
+    sms %s [-d] <message...>
     --
-    d,debug activate debugging
-    u,user= the fullsms.de username
-    p,password the fullsms.de password
-    g,gateway= the gateway to use
+    d,debug     activate debugging
+    u,user=     the fullsms.de username
+    p,password= the fullsms.de password
+    g,gateway=  the gateway to use
     r,receiver= the person to send the message to
-    s,sender= the sender to use
+    s,sender=   the sender to use
     """ % ('[' + ' | '.join(subs) + ']')
-    o = options.Options(optspec)
-    (opt, flags, extra) = o.parse(sys.argv[1:])
+    parser = options.Options(optspec)
+    (opt, flags, extra) = parser.parse(sys.argv[1:])
+    if opt.debug:
+        DEBUG = True
+        debug('Activate debug')
     cfs = parse_config()
-    user = cfs['user']
+    if not extra:
+        parser.fatal('No subcommand given')
     sub = extra[0]
     if sub not in subs:
         options.fatal("invalid subcommand: " % sub)
@@ -134,5 +138,5 @@ if __name__ == '__main__':
             print "The current balance for the account '%s' is: %s €" \
             % (user, result)
         else:
-            options.fatal("Error checking balance")
+            parser.fatal("Error checking balance")
 
