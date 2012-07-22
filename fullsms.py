@@ -126,9 +126,9 @@ if __name__ == '__main__':
     if opt.debug:
         DEBUG = True
         debug('Activate debug')
-    cfs = parse_config()
     if not extra:
         parser.fatal('No subcommand given')
+    cfs = parse_config()
     sub = extra[0]
     if sub not in subs:
         options.fatal("invalid subcommand: " % sub)
