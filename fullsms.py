@@ -514,8 +514,7 @@ if __name__ == '__main__':
         fatal("invalid subcommand: %s" % sub)
     cfs, params = parse_config(), {}
     for s in SETTINGS:
-        r = set_setting(s, cfs, opt)
-        locals()[s] = params[s] = r
+        locals()[s] = params[s] = set_setting(s, cfs, opt)
     if user is None or password is None:
         fatal('No username or password')
 
