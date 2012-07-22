@@ -5,6 +5,8 @@ import sys
 import options
 
 
+def send(user, password, gateway, receiver, sender, message):
+    pass
 
 if __name__ == '__main__':
 
