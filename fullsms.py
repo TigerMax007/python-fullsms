@@ -191,19 +191,19 @@ if __name__ == '__main__':
     if opt.debug:
         DEBUG = True
         debug('Activate debug')
-    if not extra:
+    if len(extra) == 0:
         parser.fatal('No subcommand given')
+    sub = extra[0]
+    if sub not in SUBS:
+        fatal("invalid subcommand: %s" % sub)
     cfs, params = parse_config(), {}
     for s in SETTINGS:
         r = set_setting(s, cfs, opt)
         locals()[s] = params[s] = r
     if user is None or password is None:
         fatal('No username or password')
-    sub = extra[0]
-    mess = ' '.join(extra[1:])
-    if sub not in SUBS:
-        fatal("invalid subcommand: %s" % sub)
-    elif sub == CHECK:
+
+    if sub == CHECK:
         code, result = check(user, password)
         if code == 200:
             print "The current balance for the account '%s' is: %s €" \
@@ -211,7 +211,12 @@ if __name__ == '__main__':
         else:
             fatal("Error checking balance")
     elif sub == SEND:
+        mess = ' '.join(extra[1:])
+        if len(mess) == 0:
+            fatal('No message to send')
         params['message'] = mess
+        if receiver is None:
+            fatal('No receiver')
         code, result = send(**params)
         # HTTP return code seems always to be 200
         # check result instead
