@@ -520,6 +520,8 @@ if __name__ == '__main__':
 
     if sub == CHECK:
         code, result = check(user, password)
+        # under the assumption, that result contains a '.' if its a valid
+        # balance
         if '.' in result:
             print "The current balance for the account '%s' is: %s €" \
             % (user, result)
