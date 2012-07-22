@@ -107,6 +107,24 @@ def check(user, password):
     str_ = assemble_check_str(params)
     return call(str_)
 
+def set_setting(setting, conf, cli):
+    val = None
+    try:
+        val = conf[setting]
+        debug("Value for '%s' found in conf file: '%s'" % (setting, val))
+    except KeyError:
+        pass
+    if cli[setting] is not None:
+        if val is not None:
+            debug("Value for '%s' found on command line overrides, conf file: '%s'"
+                    % (setting, val))
+        else:
+            debug("Value for '%s' found on command line: '%s'" % (setting, val))
+        val = cli[setting]
+    if val is None:
+        warn("No value for '%s' found " % setting)
+    return val
+
 if __name__ == '__main__':
     send_ = 'send'
     check_ = 'check'
@@ -129,11 +147,12 @@ if __name__ == '__main__':
     if not extra:
         parser.fatal('No subcommand given')
     cfs = parse_config()
+    user = set_setting('user', cfs, opt)
     sub = extra[0]
     if sub not in subs:
         options.fatal("invalid subcommand: " % sub)
     elif sub == check_:
-        result = check(cfs['user'], cfs['password'])
+        result = check(user, cfs['password'])
         if result is not None:
             print "The current balance for the account '%s' is: %s €" \
             % (user, result)
