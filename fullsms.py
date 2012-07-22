@@ -55,7 +55,6 @@ def debug(message):
     if DEBUG:
         print "Debug: %s" % message
 
-
 def parse_config(section='settings', config_filename="~/.fullsms"):
     """ Parse a configuration file with app settings.
 
