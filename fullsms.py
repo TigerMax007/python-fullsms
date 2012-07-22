@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import os
 import urllib
+import ConfigParser
 import options
 
 BASE_URL = "https://www.fullsms.de/gw/"
@@ -22,7 +24,7 @@ def parse_config(section='settings', config_filename="~/.fullsms"):
     Returns
     -------
     settings : dict
-        the settings, values for 'apikey', 'secret' and 'installid'
+        any settings found in the config file
 
     Raises
     ------
@@ -30,22 +32,13 @@ def parse_config(section='settings', config_filename="~/.fullsms"):
         if config_filename does not exist
     NoSectionError
         if no section with name 'section' exists
-    NoOptionError
-        if any one of 'apikey', 'secret' and 'installid' does not exist
 
     """
-    # use the config file if none given
-    if not config_filename:
-        config_filename = os.path.expanduser(config_filename)
-    # parse the config
+    config_filename = os.path.expanduser(config_filename)
     cp = ConfigParser.RawConfigParser()
     with open(config_filename) as fp:
         cp.readfp(fp)
-    # convert to dict and return
-    # doing it this way, will raise exceptions if the section or option doesn't
-    # exist
-    return dict((setting, cp.get(section, setting))
-            for setting in SETTINGS)
+    return dict(cp.items('settings'))
 
 def assemble_rest_call(function, parameters):
     """ Create a URL suitable for making a REST call to fullsms.de
@@ -82,12 +75,13 @@ def send(user, password, gateway, receiver, sender, message):
     rest_str = assemble_rest_call('', parameters)
     return call(rest_str)
 
+def assemble_check_str(params):
+    return assemble_rest_call('konto.php', params)
+
 def check(user, password):
-    parameters = {
-            'user': user,
-            'passwort': password,
-            }
-    return assemble_rest_call('konto.php', parameters)
+    params = {'user': user, 'passwort': password}
+    str_ = assemble_check_str(params)
+    return call(str_)
 
 if __name__ == '__main__':
     subcommands = ['send', 'check']
@@ -102,8 +96,13 @@ if __name__ == '__main__':
     """ % ('[' + ' | '.join(subcommands) + ']')
     o = options.Options(optspec)
     (opt, flags, extra) = o.parse(sys.argv[1:])
-
+    cfs = parse_config()
     if extra[0] not in ['check']:
         options.fatal('invalid subcommand')
-    elif extra[0]:
-        print check('abc', 'def')
+    elif extra[0] == 'check':
+        result = check(cfs['user'], cfs['password'])
+        if result is not None:
+            return "The current balance for the account %s is: %s €" % (result 
+        else:
+            options.fatal("Error checking balance")
+
