@@ -8,7 +8,7 @@ Example command line usage
 
 Send a text message::
 
-    $ fullsms send -r 012345678 -m "Hello honey, I'm home"
+    $ fullsms send -r 012345678 "Hello honey, I'm home"
 
 Check account balance::
 
