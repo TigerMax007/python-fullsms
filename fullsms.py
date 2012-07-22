@@ -108,6 +108,7 @@ if __name__ == '__main__':
     optspec = """
     sms %s [opts] <message>
     --
+    d,debug activate debugging
     u,user= the fullsms.de username
     p,password the fullsms.de password
     g,gateway= the gateway to use
