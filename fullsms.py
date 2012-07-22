@@ -24,6 +24,30 @@ for key, value in GATEWAYS.items():
 DEFAULTS = dict((zip(SETTINGS, [None] *len(SETTINGS))))
 DEFAULTS[GATEWAY] = _22
 
+CODES = {
+    200 : 'OK',
+    301 : "Syntaxerror: user missing",
+    302 : "Syntaxerror: password missing",
+    303 : "Syntaxerror: receiver missing",
+    304 : "Syntaxerror: gateway missing",
+    305 : "Syntaxerror: text missing",
+    401 : "Unauthorized (username or password wrong)",
+    404 : "Error when sening SMS",
+    405 : "User not enabled for HTTP",
+    406 : "IP not enabled for HTTP",
+    407 : "Massbroadcast not available for this gateway",
+    408 : "Massbroadcast not available for this gateway",
+    500 : "Unknowen server error, please contact <support@fullsms.de.de>",
+    501 : "SMS Text empty",
+    502 : "SMS Text too long",
+    504 : "Wrong SMS type",
+    505 : "Sender too long",
+    506 : "Cellphone number invalid",
+    507 : "Not enough credits",
+    508 : "SMS type requires a sender",
+    509 : "SMS type does not allow for a sender",
+        }
+
 DEBUG = False
 
 SEND = 'send'
@@ -112,7 +136,7 @@ def assemble_rest_call(function, parameters):
 
 def call(str_):
     file_like = urllib.urlopen(str_)
-    return file_like.read()
+    return int(file_like.getcode()), file_like.read()
 
 def assemble_send_str(params):
     return assemble_rest_call('', params)
@@ -169,8 +193,7 @@ if __name__ == '__main__':
         debug('Activate debug')
     if not extra:
         parser.fatal('No subcommand given')
-    cfs = parse_config()
-    params = {}
+    cfs, params = parse_config(), {}
     for s in SETTINGS:
         r = set_setting(s, cfs, opt)
         locals()[s] = params[s] = r
@@ -179,15 +202,21 @@ if __name__ == '__main__':
     sub = extra[0]
     mess = ' '.join(extra[1:])
     if sub not in SUBS:
-        options.fatal("invalid subcommand: " % sub)
+        fatal("invalid subcommand: %s" % sub)
     elif sub == CHECK:
-        result = check(user, password)
-        if result is not None:
+        code, result = check(user, password)
+        if code == 200:
             print "The current balance for the account '%s' is: %s €" \
             % (user, result)
         else:
             fatal("Error checking balance")
     elif sub == SEND:
         params['message'] = mess
-        result = send(**params)
-        print result
+        code, result = send(**params)
+        # HTTP return code seems always to be 200
+        # check result instead
+        result = int(result)
+        if result == 200:
+            debug('Send successful!')
+        else:
+            fatal('Error code: %d - %s' % (result, CODES[result]))
