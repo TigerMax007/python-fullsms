@@ -138,25 +138,18 @@ def check(user, password):
     return call(str_)
 
 def set_setting(setting, conf, cli):
-    order = [('default',
-                lambda x: DEFAULTS[x] is not None,
-                lambda x: DEFAULTS[x]),
-             ('conf file',
-                lambda x: conf.has_key(x),
-                lambda x: conf[x]),
-             ('command line',
-                lambda x: cli[x] is not None,
-                lambda x: cli[x])
-            ]
+    order = [('default',      DEFAULTS),
+             ('conf file',    conf),
+             ('command line', cli)]
     prev, val = None, None
-    for desc, has, get in order:
-        if has(setting):
+    for desc, container in order:
+        if container[setting] is not None:
             if val is not None:
-                val = get(setting)
+                val = container[setting]
                 debug("Value for '%s' found on %s, overrides %s: '%s'"
                         % (setting, desc, prev, val))
             else:
-                val = get(setting)
+                val = container[setting]
                 debug("Value for '%s' found in %s: '%s'"
                         % (setting, desc, val))
         prev = desc
