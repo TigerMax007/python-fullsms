@@ -82,12 +82,13 @@ def parse_config(section='settings', config_filename="~/.fullsms"):
     """
     config_filename = os.path.expanduser(config_filename)
     cp = ConfigParser.RawConfigParser()
-    with open(config_filename) as fp:
-        cp.readfp(fp)
-    sets = dict(cp.items(section))
+    cp.read(config_filename)
+    sets = DEFAULTS.copy()
+    sets.update(cp.items(section))
     for key in sets.keys():
         if key not in SETTINGS:
-            warn("Setting %s not recognized!")
+            fatal("Setting '%s' from conf file '%s' not recognized!"
+                    % (key, config_filename))
     return sets
 
 def assemble_rest_call(function, parameters):
