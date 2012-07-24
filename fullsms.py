@@ -464,13 +464,16 @@ def assemble_rest_call(function, parameters):
     return "%s%s?%s" % (BASE_URL, function, query)
 
 def call(str_):
+    """ Perform rest call and return (code, message). """
     file_like = urllib.urlopen(str_)
     return int(file_like.getcode()), file_like.read()
 
 def assemble_send_str(params):
+    """ Turn params dict into URL for send. """
     return assemble_rest_call('', params)
 
 def assemble_check_str(params):
+    """ Turn params dict into URL for check. """
     return assemble_rest_call('konto.php', params)
 
 def send(user=None,
@@ -479,6 +482,7 @@ def send(user=None,
         receiver=None,
         sender=None,
         message=None):
+    """ Implements send command. """
     parameters = {
             'user': user,
             'passwort': password,
@@ -491,11 +495,34 @@ def send(user=None,
     return call(rest_str)
 
 def check(user, password):
+    """ Implements check command. """
     params = {'user': user, 'passwort': password}
     str_ = assemble_check_str(params)
     return call(str_)
 
 def set_setting(setting, conf, cli):
+    """ Extract the value for setting in order.
+
+    Parameters
+    ----------
+    setting : str
+        the setting to look for
+    conf : dict
+        the dictionary from the configuration file
+    cli : dict like
+        the magic dictionary from the command line
+
+    Returns
+    -------
+    val : str
+        an appropriate value for setting
+
+    Notes
+    -----
+
+    Will issues debug and warning messages when overriding.
+
+    """
     order = [('default',      DEFAULTS),
              ('conf file',    conf),
              ('command line', cli)]
