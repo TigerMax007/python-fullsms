@@ -360,6 +360,7 @@ CODES = {
     509 : "SMS type does not allow for a sender",
         }
 
+QUIET = False
 DEBUG = False
 
 SEND = 'send'
@@ -369,6 +370,7 @@ optspec = """
 sms %s [-d] <message...>
 --
  general program options
+q,quiet     silence all outpt
 d,debug     activate debugging
 h,help      display help and exit
  for all subcommands
@@ -381,19 +383,30 @@ s,sender=   the sender to use
 """ % ('[' + ' | '.join(SUBS) + ']')
 parser = Options(optspec)
 
+def info(message):
+    """ Informational messages. """
+    if not QUIET:
+        print "Info:    %s" % message
+
 def warn(message):
-    print "Warning: %s" % message
+    """ Warnings. """
+    if not QUIET:
+        print "Warning: %s" % message
+
+def debug(message):
+    """ Debug messages """
+    if DEBUG and not QUIET:
+        print "Debug:   %s" % message
 
 def fatal(message):
+    """ Errors related to parsing. """
     parser.fatal(message)
 
 def error(message):
-    print "Error: %s" % message
+    """ General program errors. """
+    print "Error:       %s" % message
     sys.exit(2)
 
-def debug(message):
-    if DEBUG:
-        print "Debug: %s" % message
 
 def parse_config(section='settings', config_filename="~/.fullsms"):
     """ Parse a configuration file with app settings.
@@ -504,9 +517,13 @@ def set_setting(setting, conf, cli):
 
 if __name__ == '__main__':
     (opt, flags, extra) = parser.parse(sys.argv[1:])
+    if not sum([x is not None for x in (opt.debug, opt.quiet)]) <= 1:
+        fatal("'debug' and 'quiet' are mutually exclusive.")
     if opt.debug:
         DEBUG = True
         debug('Activate debug')
+    elif opt.quiet:
+        QUIET = True
     if len(extra) == 0:
         parser.fatal('No subcommand given')
     sub = extra[0]
