@@ -540,8 +540,8 @@ if __name__ == '__main__':
         # under the assumption, that result contains a '.' if its a valid
         # balance
         if '.' in result:
-            print "The current balance for the account '%s' is: %s €" \
-            % (user, result)
+            info("The current balance for the account '%s' is: %s €" \
+            % (user, result))
         else:
             result = int(result)
             error("Failed checking, error code: %d - %s"
@@ -558,7 +558,7 @@ if __name__ == '__main__':
         # check result instead
         result = int(result)
         if result == 200:
-            debug('Send successful!')
+            info('Send successful!')
         else:
             error('Failed sending, error code: %d - %s'
                     % (result, CODES[result]))
