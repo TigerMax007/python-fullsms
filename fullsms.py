@@ -499,15 +499,14 @@ def set_setting(setting, conf, cli):
     order = [('default',      DEFAULTS),
              ('conf file',    conf),
              ('command line', cli)]
-    prev, val = None, None
+    prev, val prev_val = None, None, None
     for desc, container in order:
         if container[setting] is not None:
-            if val is not None:
-                val = container[setting]
+            prev_val, val = val, container[setting]
+            if prev_val is not None:
                 debug("Value for '%s' found on %s, overrides %s: '%s'"
                         % (setting, desc, prev, val))
             else:
-                val = container[setting]
                 debug("Value for '%s' found in %s: '%s'"
                         % (setting, desc, val))
         prev = desc
