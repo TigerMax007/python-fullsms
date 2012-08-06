@@ -607,6 +607,10 @@ if __name__ == '__main__':
         fatal('No username or password')
 
     if sub == CHECK:
+        debug("Ignoring: '%s' for '%s'" %
+                ([s if locals()[s] is not None
+                    for s in (SENDER, RECEIVER, GATEWAY)],
+                    CHECK))
         code, result = check(user, password)
         # under the assumption, that result contains a '.' if its a valid
         # balance
