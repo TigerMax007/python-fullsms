@@ -526,7 +526,7 @@ def set_setting(setting, conf, cli):
     order = [('default',      DEFAULTS),
              ('conf file',    conf),
              ('command line', cli)]
-    prev, val prev_val = None, None, None
+    prev, val, prev_val = None, None, None
     for desc, container in order:
         if container[setting] is not None:
             prev_val, val = val, container[setting]
