@@ -38,7 +38,7 @@ The ``python-fullsms`` can easily be used as a python module::
                      gateway=21,
                      receiver=0123456789,
                      sender=0123456789,
-                     text="Hello honey, I'm home")
+                     message="Hello honey, I'm home")
     (200 : 'OK')
 
     >>> fullsms.check(user=MaxMusterman, password=maxmustermangeheim)
