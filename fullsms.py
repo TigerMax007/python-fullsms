@@ -483,7 +483,7 @@ def assemble_rest_call(function, parameters):
     """
     query = urllib.urlencode(sorted(parameters.items()))
     call_string = "%s%s?%s" % (BASE_URL, function, query)
-    debug(call_string)
+    debug("REST call string: "call_string)
     return call_string
 
 def call(str_):
