@@ -335,6 +335,8 @@ for key, value in GATEWAYS.items():
 
 DEFAULTS = dict((zip(SETTINGS, [None] *len(SETTINGS))))
 DEFAULTS[GATEWAY] = _22
+DEFAULT_CONFIG_FILE = "~/.fullsms"
+
 
 CODES = {
     200 : 'OK',
@@ -410,14 +412,14 @@ def error(message):
 class UnknownSettingError(Exception):
     pass
 
-def open_config(config_filename="~/.fullsms"):
+def open_config(config_filename=DEFAULT_CONFIG_FILE):
     """ Open a config-file.
 
     Parameters
     ----------
     config_filename : str
         the path to and name of the config file
-        (default: '~/.fullsms')
+        (uses module default)
 
     Raises
     ------
@@ -576,10 +578,19 @@ if __name__ == '__main__':
     sub = extra[0]
     if sub not in SUBS:
         fatal("invalid subcommand: %s" % sub)
+    config_fp = None
     try:
-        cfs, params = parse_config(), {}
-    except UnknownSettingError as use:
-        error(use)
+        config_fp = open_config()
+    except IOError:
+        debug("No config file at '%s'" % DEFAULT_CONFIG_FILE)
+    else:
+        try:
+            cfs, params = parse_config(), {}
+        except UnknownSettingError as use:
+            error(use)
+    finally:
+        if config_fp is not None:
+            config_fp.close()
     for s in SETTINGS:
         locals()[s] = params[s] = set_setting(s, cfs, opt)
     if user is None or password is None:
