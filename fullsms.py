@@ -585,7 +585,7 @@ if __name__ == '__main__':
         debug("No config file at '%s'" % DEFAULT_CONFIG_FILE)
     else:
         try:
-            cfs, params = parse_config(), {}
+            cfs, params = parse_config(config_fp), {}
         except UnknownSettingError as use:
             error(use)
     finally:
