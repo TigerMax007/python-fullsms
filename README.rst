@@ -26,6 +26,9 @@ For all available options, use::
 
     $ sms -h
 
+Note: if you are using the script from a cron-job you can silence the output
+using ``[-q | --quiet]`` switch.
+
 Example library usage
 =====================
 
