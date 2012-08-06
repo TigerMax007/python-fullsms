@@ -333,7 +333,7 @@ GATEWAYS = dict(('_'+str(g), g) for g in [11, 26, 31, 12, 22, 27, 32])
 for key, value in GATEWAYS.items():
     globals()[key] = value
 
-DEFAULTS = dict((zip(SETTINGS, [None] *len(SETTINGS))))
+DEFAULTS = dict((zip(SETTINGS, [None] * len(SETTINGS))))
 DEFAULTS[GATEWAY] = _22
 DEFAULT_CONFIG_FILE = "~/.fullsms"
 
