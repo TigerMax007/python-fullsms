@@ -601,7 +601,7 @@ if __name__ == '__main__':
             config_fp.close()
     # select the setting with the highest precedence
     for s in SETTINGS:
-        locals()[s] = params[s] = set_setting(s, cfs, opt)
+        locals()[s] = params[s] = set_setting(s, config_file_settings, opt)
 
     if user is None or password is None:
         fatal('No username or password')
