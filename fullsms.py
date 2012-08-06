@@ -435,13 +435,14 @@ def parse_config(section='settings', config_filename="~/.fullsms"):
     """
     config_filename = os.path.expanduser(config_filename)
     cp = ConfigParser.RawConfigParser()
-    cp.read(config_filename)
-    sets = DEFAULTS.copy()
-    sets.update(cp.items(section))
-    for key in sets.keys():
-        if key not in SETTINGS:
-            fatal("Setting '%s' from conf file '%s' not recognized!"
-                    % (key, config_filename))
+    with open(config_filename, 'r') as config_fp:
+        cp.read(config_filename)
+        sets = DEFAULTS.copy()
+        sets.update(cp.items(section))
+        for key in sets.keys():
+            if key not in SETTINGS:
+                fatal("Setting '%s' from conf file '%s' not recognized!"
+                        % (key, config_filename))
     return sets
 
 def assemble_rest_call(function, parameters):

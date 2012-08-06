@@ -29,3 +29,4 @@ def test_parse_config():
                 'sender': '0123456789',
                 'receiver': '0123456789'}
     nt.assert_equal(config, expected)
+    nt.assert_raises(IOError, sms.parse_config, config_filename="nofile")
