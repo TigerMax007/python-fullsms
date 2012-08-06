@@ -624,6 +624,7 @@ if __name__ == '__main__':
                     % (result, CODES[result]))
     elif sub == SEND:
         mess = ' '.join(extra[1:])
+        debug("Message: '%s'" % mess)
         if len(mess) == 0:
             fatal('No message to send')
         params['message'] = mess
