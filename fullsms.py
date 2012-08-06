@@ -433,6 +433,8 @@ def parse_config(section='settings', config_filename="~/.fullsms"):
         if config_filename does not exist
     NoSectionError
         if no section with name 'section' exists
+    UnknownSettingError
+        if an unknown setting is present in the configuration
 
     """
     config_filename = os.path.expanduser(config_filename)
@@ -443,7 +445,7 @@ def parse_config(section='settings', config_filename="~/.fullsms"):
         sets.update(cp.items(section))
         for key in sets.keys():
             if key not in SETTINGS:
-                raise UnknowenSettingError(
+                raise UnknownSettingError(
                     "Setting '%s' from conf file '%s' not recognized!"
                         % (key, config_filename))
     return sets
