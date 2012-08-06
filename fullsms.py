@@ -369,7 +369,7 @@ SEND = 'send'
 CHECK = 'check'
 SUBS = [SEND, CHECK]
 optspec = """
-sms %s [-d] <message...>
+sms %s [OPTIONS] <message...>
 --
  general program options
 q,quiet     silence all outpt
