@@ -456,8 +456,7 @@ def parse_config(config_fp, section='settings'):
     """
     cp = ConfigParser.RawConfigParser()
     cp.readfp(config_fp)
-    sets = DEFAULTS.copy()
-    sets.update(cp.items(section))
+    sets = dict(cp.items(section))
     for key in sets.keys():
         if key not in SETTINGS:
             raise UnknownSettingError(
@@ -578,21 +577,31 @@ if __name__ == '__main__':
     sub = extra[0]
     if sub not in SUBS:
         fatal("invalid subcommand: %s" % sub)
+
+    # empty config_file pointer
     config_fp = None
+    # settings dict with all None and empty params dict
+    cfs, params = dict((zip(SETTINGS, [None] * len(SETTINGS)))), {}
+    # try opening the config file
     try:
         config_fp = open_config()
     except IOError:
         debug("No config file at '%s'" % DEFAULT_CONFIG_FILE)
     else:
         try:
-            cfs, params = parse_config(config_fp), {}
+            # read the settings from the file
+            cfs_file = parse_config(config_fp)
+            # and update the config file settings
+            cfs.update(cfs_file)
         except UnknownSettingError as use:
             error(use)
     finally:
         if config_fp is not None:
             config_fp.close()
+    # select the setting with the highest precedence
     for s in SETTINGS:
         locals()[s] = params[s] = set_setting(s, cfs, opt)
+
     if user is None or password is None:
         fatal('No username or password')
 
