@@ -407,20 +407,37 @@ def error(message):
     print "Error:       %s" % message
     sys.exit(2)
 
-class UnknowenSettingError(Exception):
+class UnknownSettingError(Exception):
     pass
 
-def parse_config(section='settings', config_filename="~/.fullsms"):
+def open_config(config_filename="~/.fullsms"):
+    """ Open a config-file.
+
+    Parameters
+    ----------
+    config_filename : str
+        the path to and name of the config file
+        (default: '~/.fullsms')
+
+    Raises
+    ------
+    IOError:
+        if config_filename does not exist
+
+    """
+    config_filename = os.path.expanduser(config_filename)
+    return open(config_filename)
+
+def parse_config(config_fp, section='settings'):
     """ Parse a configuration file with app settings.
 
     Parameters
     ----------
+    config_fp : file-like
+        the file-pointer to the config file
     section : str
         the name of the config section where to look for settings
         (default: 'settings')
-    config_filename : str
-        the path to and name of the config file
-        (default: '~/.fullsms')
 
     Returns
     -------
@@ -429,25 +446,21 @@ def parse_config(section='settings', config_filename="~/.fullsms"):
 
     Raises
     ------
-    IOError:
-        if config_filename does not exist
     NoSectionError
         if no section with name 'section' exists
     UnknownSettingError
         if an unknown setting is present in the configuration
 
     """
-    config_filename = os.path.expanduser(config_filename)
     cp = ConfigParser.RawConfigParser()
-    with open(config_filename, 'r') as config_fp:
-        cp.read(config_filename)
-        sets = DEFAULTS.copy()
-        sets.update(cp.items(section))
-        for key in sets.keys():
-            if key not in SETTINGS:
-                raise UnknownSettingError(
-                    "Setting '%s' from conf file '%s' not recognized!"
-                        % (key, config_filename))
+    cp.readfp(config_fp)
+    sets = DEFAULTS.copy()
+    sets.update(cp.items(section))
+    for key in sets.keys():
+        if key not in SETTINGS:
+            raise UnknownSettingError(
+                "Setting '%s' from conf file '%s' not recognized!"
+                    % (key, config_fp.name))
     return sets
 
 def assemble_rest_call(function, parameters):
