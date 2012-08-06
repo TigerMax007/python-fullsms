@@ -578,7 +578,7 @@ if __name__ == '__main__':
         fatal("invalid subcommand: %s" % sub)
     try:
         cfs, params = parse_config(), {}
-    except UnknowenSettingError as use:
+    except UnknownSettingError as use:
         error(use)
     for s in SETTINGS:
         locals()[s] = params[s] = set_setting(s, cfs, opt)
