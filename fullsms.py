@@ -407,6 +407,8 @@ def error(message):
     print "Error:       %s" % message
     sys.exit(2)
 
+class UnknowenSettingError(Exception):
+    pass
 
 def parse_config(section='settings', config_filename="~/.fullsms"):
     """ Parse a configuration file with app settings.
@@ -441,7 +443,8 @@ def parse_config(section='settings', config_filename="~/.fullsms"):
         sets.update(cp.items(section))
         for key in sets.keys():
             if key not in SETTINGS:
-                fatal("Setting '%s' from conf file '%s' not recognized!"
+                raise UnknowenSettingError(
+                    "Setting '%s' from conf file '%s' not recognized!"
                         % (key, config_filename))
     return sets
 
@@ -556,7 +559,10 @@ if __name__ == '__main__':
     sub = extra[0]
     if sub not in SUBS:
         fatal("invalid subcommand: %s" % sub)
-    cfs, params = parse_config(), {}
+    try:
+        cfs, params = parse_config(), {}
+    except UnknowenSettingError as use:
+        error(use.message)
     for s in SETTINGS:
         locals()[s] = params[s] = set_setting(s, cfs, opt)
     if user is None or password is None:

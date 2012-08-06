@@ -51,3 +51,16 @@ def test_parse_config():
     config = sms.parse_config(section='configuration',
             config_filename=config_file.name)
     nt.assert_equal(config, expected)
+    # check for invalid setting
+    test_config_bogus = textwrap.dedent("""
+    [settings]
+    user     = MaxMusterman
+    password = maxmustermangeheim
+    gateway  = 11
+    sender   = 0123456789
+    receiver = 0123456789
+    bogus    = nonsense
+    """)
+    config_file = make_tempfile(test_config_bogus)
+    nt.assert_raises(sms.UnknowenSettingError, sms.parse_config,
+            config_filename=config_file.name)
