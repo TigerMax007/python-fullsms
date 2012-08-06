@@ -467,7 +467,9 @@ def assemble_rest_call(function, parameters):
 
     """
     query = urllib.urlencode(sorted(parameters.items()))
-    return "%s%s?%s" % (BASE_URL, function, query)
+    call_string = "%s%s?%s" % (BASE_URL, function, query)
+    debug(call_string)
+    return call_string
 
 def call(str_):
     """ Perform rest call and return (code, message). """
