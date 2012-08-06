@@ -594,7 +594,7 @@ if __name__ == '__main__':
             # read the settings from the file
             config_file_settings_temp = parse_config(config_fp)
             # and update the config file settings
-            config_file_settings_temp.update(config_file_settings_temp)
+            config_file_settings.update(config_file_settings_temp)
         except UnknownSettingError as use:
             error(use)
     finally:
