@@ -608,8 +608,8 @@ if __name__ == '__main__':
 
     if sub == CHECK:
         debug("Ignoring: '%s' for '%s'" %
-                ([s if locals()[s] is not None
-                    for s in (SENDER, RECEIVER, GATEWAY)],
+                ([s for s in (SENDER, RECEIVER, GATEWAY)
+                    if locals()[s] is not None],
                     CHECK))
         code, result = check(user, password)
         # under the assumption, that result contains a '.' if its a valid
