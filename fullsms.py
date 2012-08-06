@@ -562,7 +562,7 @@ if __name__ == '__main__':
     try:
         cfs, params = parse_config(), {}
     except UnknowenSettingError as use:
-        error(use.message)
+        error(use)
     for s in SETTINGS:
         locals()[s] = params[s] = set_setting(s, cfs, opt)
     if user is None or password is None:
