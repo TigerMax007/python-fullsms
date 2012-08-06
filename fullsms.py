@@ -581,7 +581,8 @@ if __name__ == '__main__':
     # empty config_file pointer
     config_fp = None
     # settings dict with all None and empty params dict
-    cfs, params = dict((zip(SETTINGS, [None] * len(SETTINGS)))), {}
+    config_file_settings, params = \
+            dict((zip(SETTINGS, [None] * len(SETTINGS)))), {}
     # try opening the config file
     try:
         config_fp = open_config()
@@ -590,9 +591,9 @@ if __name__ == '__main__':
     else:
         try:
             # read the settings from the file
-            cfs_file = parse_config(config_fp)
+            config_file_settings_temp = parse_config(config_fp)
             # and update the config file settings
-            cfs.update(cfs_file)
+            config_file_settings_temp.update(config_file_settings_temp)
         except UnknownSettingError as use:
             error(use)
     finally:
