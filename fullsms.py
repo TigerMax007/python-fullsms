@@ -586,6 +586,7 @@ if __name__ == '__main__':
     # try opening the config file
     try:
         config_fp = open_config()
+        debug("Config file at '%s'" % config_fp.name)
     except IOError:
         debug("No config file at '%s'" % DEFAULT_CONFIG_FILE)
     else:
