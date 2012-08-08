@@ -654,14 +654,14 @@ if __name__ == '__main__':
         try:
             gateway = check_gateway(params[GATEWAY])
         except ValueError as ve:
-            error(ve)
+            fatal(ve)
         mess = ' '.join(extra[1:])
         mess_len = len(mess)
         debug("Message: '%s', length: '%d'" % (mess, mess_len))
         if mess_len == 0:
-            error('No message to send')
+            fatal('No message to send')
         if mess_len > gateway.limit:
-            error("Message too long: '%d', gateway has max length: '%d'"
+            fatal("Message too long: '%d', gateway has max length: '%d'"
                     % (mess_len, gateway.limit))
         params['message'] = mess
         if receiver is None:
