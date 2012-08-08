@@ -600,7 +600,7 @@ if __name__ == '__main__':
     elif opt.quiet:
         QUIET = True
     if len(extra) == 0:
-        parser.fatal('No subcommand given')
+        fatal('No subcommand given')
     sub = extra[0]
     if sub not in SUBS:
         fatal("invalid subcommand: %s" % sub)
