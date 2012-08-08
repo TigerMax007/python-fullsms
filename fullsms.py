@@ -540,11 +540,6 @@ def set_setting(setting, conf, cli):
     val : str
         an appropriate value for setting
 
-    Notes
-    -----
-
-    Will issues debug and warning messages when overriding.
-
     """
     order = [('defaults',      DEFAULTS),
              ('conf file',    conf),
