@@ -59,7 +59,7 @@ Default settings can be stored in the file ``~/.fullsms``::
     sender   = 0123456789
     receiver = 0123456789
 
-If you wish to use an alternative file, use the ``[-c | --config]`` switch.
+Note: If you wish to use an alternative file, use the ``[-c | --config]`` switch.
 
 Author and Copyright
 ====================
