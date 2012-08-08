@@ -692,7 +692,6 @@ if __name__ == '__main__':
         if s in API_SETTINGS:
             params[s] = locals()[s]
 
-
     if user is None or password is None:
         fatal('No username and/or password')
     elif sub == CHECK:
