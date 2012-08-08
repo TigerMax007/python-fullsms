@@ -408,10 +408,12 @@ y,dry-run   don't perform any REST calls
 u,user=     the fullsms.de username
 p,password= the fullsms.de password
  for 'send' only
-g,gateway=  the gateway to use
+g,gateway=  the gateway to use (default: '%s')
 r,receiver= the person to send the message to
 s,sender=   the sender to use
-""" % ('[' + ' | '.join(SUBS) + ']', DEFAULT_CONFIG_FILE)
+""" % ('[' + ' | '.join(SUBS) + ']',
+        DEFAULT_CONFIG_FILE,
+        DEFAULTS[GATEWAY])
 parser = Options(optspec)
 
 def info(message):
