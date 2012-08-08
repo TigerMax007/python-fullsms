@@ -322,11 +322,11 @@ class Options:
 
 BASE_URL = "https://www.fullsms.de/gw/"
 
-USER     = 'user'
-PASSWORD = 'password'
-GATEWAY  = 'gateway'
-RECEIVER = 'receiver'
-SENDER   = 'sender'
+USER      = 'user'
+PASSWORD  = 'password'
+GATEWAY   = 'gateway'
+RECEIVER  = 'receiver'
+SENDER    = 'sender'
 PHONEBOOK = 'phonebook'
 # settings only relevant for the fullsms http interface
 API_SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
