@@ -397,10 +397,10 @@ sms %s [OPTIONS] <message...>
 q,quiet     silence all outpt
 d,debug     activate debugging
 h,help      display help and exit
+c,config= the config file to use (default: '%s')
  for all subcommands
 u,user=     the fullsms.de username
 p,password= the fullsms.de password
-c,config= the config file to use (default: '%s')
  for 'send' only
 g,gateway=  the gateway to use
 r,receiver= the person to send the message to
