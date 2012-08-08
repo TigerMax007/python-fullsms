@@ -585,7 +585,9 @@ def set_setting(setting, conf, cli):
 
 def check_gateway(str_):
     """ Ensure that the gateway is valid. """
-    if str(str_) not in GATEWAYS.keys():
+    try:
+        return GATEWAYS[str(str_)]
+    except KeyError:
         raise ValueError("Gateway: '%s' is not defined." % str_)
 
 if __name__ == '__main__':
