@@ -420,7 +420,7 @@ r,receiver=   the person to send the message to
 s,sender=     the sender to use
  phonebook management
 b,phonebook=  the phonebook file
-""" % tuple(['[' + ' | '.join(SUBS) + ']'] + 
+""" % tuple(['[' + ' | '.join(SUBS) + ']'] +
         map(default, (DEFAULT_CONFIG_FILE, DEFAULTS[GATEWAY])))
 parser = Options(optspec)
 
