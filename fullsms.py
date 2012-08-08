@@ -328,7 +328,8 @@ GATEWAY  = 'gateway'
 RECEIVER = 'receiver'
 SENDER   = 'sender'
 PHONEBOOK = 'phonebook'
-SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER, PHONEBOOK]
+API_SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
+SETTINGS = API_SETTINGS + [PHONEBOOK]
 
 class Gateway(object):
     """ Simple object to store gateway attributes.
@@ -685,7 +686,9 @@ if __name__ == '__main__':
             config_fp.close()
     # select the setting with the highest precedence
     for s in SETTINGS:
-        locals()[s] = params[s] = set_setting(s, config_file_settings, opt)
+        locals()[s] = set_setting(s, config_file_settings, opt)
+        if s in API_SETTINGS:
+            params[s] = locals()[s]
 
     if user is None or password is None:
         fatal('No username and/or password')
