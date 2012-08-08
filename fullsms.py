@@ -672,7 +672,7 @@ if __name__ == '__main__':
         debug("Message: '%s', length: '%d'" % (mess, mess_len))
         if mess_len == 0:
             fatal('No message to send')
-        if mess_len > gateway.limit:
+        elif mess_len > gateway.limit:
             fatal("Message too long: '%d', gateway has max length: '%d'"
                     % (mess_len, gateway.limit))
         params['message'] = mess
