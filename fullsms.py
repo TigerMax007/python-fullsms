@@ -560,7 +560,7 @@ def set_setting(setting, conf, cli):
                         % (setting, desc, val))
         prev = desc
     if val is None:
-        warn("No value for '%s' found " % setting)
+        debug("No value for '%s' found anywhere" % setting)
     return val
 
 if __name__ == '__main__':
