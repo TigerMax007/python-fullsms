@@ -444,14 +444,13 @@ class UnknownSettingError(Exception):
     """ Raised when an unknown setting is encounterd in a config file. """
     pass
 
-def open_config(config_filename=DEFAULT_CONFIG_FILE):
+def open_config(config_filename):
     """ Open a config-file.
 
     Parameters
     ----------
     config_filename : str
         the path to and name of the config file
-        (uses module default)
 
     Raises
     ------
@@ -634,7 +633,7 @@ if __name__ == '__main__':
             dict((zip(SETTINGS, [None] * len(SETTINGS)))), {}
     # try opening the config file
     try:
-        config_fp = open_config(config_filename=config_filename)
+        config_fp = open_config(config_filename)
         debug("Config file at '%s'" % config_fp.name)
     except IOError:
         debug("No config file at '%s'" % config_filename)
