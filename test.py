@@ -4,6 +4,7 @@
 import textwrap
 import tempfile
 from ConfigParser import NoSectionError
+import StringIO
 
 import nose.tools as nt
 
@@ -66,3 +67,18 @@ def test_parse_config():
     config_file = make_tempfile(test_config_bogus)
     nt.assert_raises(sms.UnknownSettingError, sms.parse_config,
             config_file)
+
+def test_parse_phonebook():
+    test_phonebook = textwrap.dedent("""
+    [contacts]
+    max = 0123456789
+    maxine = 1234567890
+    maximilian = 2345678901
+    """)
+    phonebook_fp = StringIO.StringIO(test_phonebook)
+    contacts = sms.parse_phonebook(phonebook_fp)
+    expected = {'max': '0123456789',
+                'maxine': '1234567890',
+                'maximilian': '2345678901'}
+    nt.assert_equal(contacts, expected)
+

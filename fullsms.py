@@ -498,6 +498,37 @@ def parse_config(config_fp, section='settings'):
                     % (key, config_fp.name))
     return sets
 
+def parse_phonebook(phonebook_fp, section='contacts'):
+    """ Parse the phonebook.
+
+    Parameters
+    ----------
+    phonebook_fp : file-like
+        the file-pointer to the phonebook file
+    section : str
+        the section of the entries, default: 'contacts'
+
+    Returns
+    -------
+    contacts : dict str -> str
+        the contacts name -> number
+
+    Raises
+    ------
+    NoSectionError
+        if no section with the name 'section' is present
+    """
+    cp = ConfigParser.RawConfigParser()
+    cp.readfp(phonebook_fp)
+    contacts = dict(cp.items(section))
+    if DEBUG:
+        max_len = max(contacts.keys()) + 4
+        debug("Phonebook at '%s' has the following entries:"
+                % phonebook_fp.name)
+        for name, number  in contacts.iter_values():
+            debug('%s : %s', (k.ljust(max_len), number))
+    return contacts
+
 def assemble_rest_call(function, parameters):
     """ Create a URL suitable for making a REST call to fullsms.de
 
