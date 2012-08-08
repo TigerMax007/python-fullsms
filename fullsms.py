@@ -711,7 +711,7 @@ if __name__ == '__main__':
             error("Failed checking, error code: %d - %s"
                     % (result, CODES[result]))
     elif sub == SEND:
-        # chck the gateway argument
+        # check the gateway argument
         try:
             gateway = check_gateway(params[GATEWAY])
         except ValueError as ve:
@@ -728,13 +728,13 @@ if __name__ == '__main__':
                     % (mess_len, gateway.limit))
         params['message'] = mess
 
-        # check the sende argument
+        # check the sender argument
         try:
             check_sender(sender)
         except ValueError as ve:
             fatal(ve)
 
-        # make sure we have some kind fo receiver
+        # make sure we have some kind of receiver
         if receiver is None:
             fatal('No receiver')
 
