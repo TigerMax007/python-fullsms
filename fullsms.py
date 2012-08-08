@@ -418,7 +418,7 @@ p,password= the fullsms.de password
 g,gateway=  the gateway to use %s
 r,receiver= the person to send the message to
 s,sender=   the sender to use
-p,phonebook= the phonebook file
+b,phonebook= the phonebook file
 """ % tuple(['[' + ' | '.join(SUBS) + ']'] + 
         map(default, (DEFAULT_CONFIG_FILE, DEFAULTS[GATEWAY])))
 parser = Options(optspec)
