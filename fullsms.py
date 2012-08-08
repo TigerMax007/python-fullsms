@@ -406,19 +406,20 @@ optspec = """
 sms %s [OPTIONS] <message...>
 --
  general program options
-q,quiet     silence all outpt
-d,debug     activate debugging
-h,help      display help and exit
-c,config=   the config file to use %s
-y,dry-run   don't perform any REST calls
+q,quiet       silence all outpt
+d,debug       activate debugging
+h,help        display help and exit
+c,config=     the config file to use %s
+y,dry-run     don't perform any REST calls
  for all subcommands
-u,user=     the fullsms.de username
-p,password= the fullsms.de password
+u,user=       the fullsms.de username
+p,password=   the fullsms.de password
  for 'send' only
-g,gateway=  the gateway to use %s
-r,receiver= the person to send the message to
-s,sender=   the sender to use
-b,phonebook= the phonebook file
+g,gateway=    the gateway to use %s
+r,receiver=   the person to send the message to
+s,sender=     the sender to use
+ phonebook management
+b,phonebook=  the phonebook file
 """ % tuple(['[' + ' | '.join(SUBS) + ']'] + 
         map(default, (DEFAULT_CONFIG_FILE, DEFAULTS[GATEWAY])))
 parser = Options(optspec)
