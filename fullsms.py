@@ -360,6 +360,11 @@ DEFAULTS = dict((zip(SETTINGS, [None] * len(SETTINGS))))
 DEFAULTS[GATEWAY] = GATEWAYS[str(22)]
 DEFAULT_CONFIG_FILE = "~/.fullsms"
 
+QUIET = False
+DEBUG = False
+DRY_RUN = False
+DRY_RUN_CODE = 666
+
 CODES = {
     200 : 'OK',
     301 : "Syntaxerror: user missing",
@@ -382,10 +387,10 @@ CODES = {
     507 : "Not enough credits",
     508 : "SMS type requires a sender",
     509 : "SMS type does not allow for a sender",
+    # special option for python-fullsms only
+    DRY_RUN_CODE : "No REST call made, probably using '--dry-run'"
         }
 
-QUIET = False
-DEBUG = False
 
 SEND = 'send'
 CHECK = 'check'
@@ -397,7 +402,8 @@ sms %s [OPTIONS] <message...>
 q,quiet     silence all outpt
 d,debug     activate debugging
 h,help      display help and exit
-c,config= the config file to use (default: '%s')
+c,config=   the config file to use (default: '%s')
+y,dry-run   don't perform any REST calls
  for all subcommands
 u,user=     the fullsms.de username
 p,password= the fullsms.de password
@@ -512,8 +518,11 @@ def assemble_rest_call(function, parameters):
 
 def call(str_):
     """ Perform rest call and return (code, message). """
-    file_like = urllib.urlopen(str_)
-    return int(file_like.getcode()), file_like.read()
+    if not DRY_RUN:
+        file_like = urllib.urlopen(str_)
+        return int(file_like.getcode()), file_like.read()
+    else:
+        return DRY_RUN_CODE, DRY_RUN_CODE
 
 def assemble_send_str(params):
     """ Turn params dict into URL for send. """
@@ -599,6 +608,8 @@ if __name__ == '__main__':
         debug('Activate debug')
     elif opt.quiet:
         QUIET = True
+    if opt.dry_run:
+        DRY_RUN = True
     if len(extra) == 0:
         fatal('No subcommand given')
     sub = extra[0]
