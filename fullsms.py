@@ -327,6 +327,7 @@ PASSWORD = 'password'
 GATEWAY  = 'gateway'
 RECEIVER = 'receiver'
 SENDER   = 'sender'
+PHONEBOOK = 'phonebook'
 SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
 
 class Gateway(object):
@@ -359,6 +360,7 @@ GATEWAYS = dict((str(g[0]), Gateway(*g)) for g in
 DEFAULTS = dict((zip(SETTINGS, [None] * len(SETTINGS))))
 DEFAULTS[GATEWAY] = GATEWAYS[str(22)]
 DEFAULT_CONFIG_FILE = "~/.fullsms"
+DEFAULT_PHONE_BOOK = "~/.fullsms-book"
 
 QUIET = False
 DEBUG = False
@@ -412,6 +414,7 @@ p,password= the fullsms.de password
 g,gateway=  the gateway to use %s
 r,receiver= the person to send the message to
 s,sender=   the sender to use
+p,phonebook= the phonebook file
 """ % tuple(['[' + ' | '.join(SUBS) + ']'] + 
         map(default, (DEFAULT_CONFIG_FILE, DEFAULTS[GATEWAY])))
 parser = Options(optspec)
