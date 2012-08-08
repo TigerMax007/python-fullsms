@@ -327,11 +327,12 @@ PASSWORD  = 'password'
 GATEWAY   = 'gateway'
 RECEIVER  = 'receiver'
 SENDER    = 'sender'
-PHONEBOOK = 'phonebook'
 # settings only relevant for the fullsms http interface
 API_SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
+PHONEBOOK = 'phonebook'
+EXPAND    = 'expand'
 # all settings
-SETTINGS = API_SETTINGS + [PHONEBOOK]
+SETTINGS = API_SETTINGS + [PHONEBOOK, EXPAND]
 
 class Gateway(object):
     """ Simple object to store gateway attributes.
@@ -365,6 +366,7 @@ DEFAULTS[GATEWAY] = GATEWAYS[str(22)]
 DEFAULT_CONFIG_FILE = "~/.fullsms"
 DEFAULT_PHONE_BOOK = "~/.fullsms-book"
 DEFAULTS[PHONEBOOK] = DEFAULT_PHONE_BOOK
+DEFAULTS[EXPAND] = True
 
 QUIET = False
 DEBUG = False
@@ -420,6 +422,7 @@ r,receiver=   the person to send the message to
 s,sender=     the sender to use
  phonebook management
 b,phonebook=  the phonebook file
+e,no-expand   do not expand sender from the phonebook
 """ % tuple(['[' + ' | '.join(SUBS) + ']'] +
         map(default, (DEFAULT_CONFIG_FILE, DEFAULTS[GATEWAY])))
 parser = Options(optspec)
@@ -747,11 +750,21 @@ if __name__ == '__main__':
         else:
             # try to expand receiver from the phone book
             if receiver in contacts:
-                debug("Expanding '%s' to '%s' via phonebook"
+                debug("Expanding receiver '%s' to '%s' via phonebook"
                         % (receiver, contacts[receiver]))
                 receiver = contacts[receiver]
             else:
-                debug("Value '%s' not found in phonebook" % receiver)
+                debug("Receiver value '%s' not found in phonebook" % receiver)
+            if expand:
+                if sender in contacts:
+                    debug("Expanding sender '%s' to '%s' via phonebook"
+                            % (sender, contacts[sender]))
+                    sender = contacts[sender]
+                else:
+                    debug("Sender value '%s' not found in phonebook" % receiver)
+            else:
+                debug("Not attempting to expand the sender")
+
 
         # perform the sending
         code, result = send(**params)
