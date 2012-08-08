@@ -346,7 +346,7 @@ class Gateway(object):
     def __str__(self):
         return str(self.id_)
 
-GATEWAYS = dict(('_'+str(g[0]), Gateway(*g)) for g in
+GATEWAYS = dict((str(g[0]), Gateway(*g)) for g in
         [(11, 1560, True ),
          (26,  800, False),
          (31,  160, False),
@@ -355,11 +355,9 @@ GATEWAYS = dict(('_'+str(g[0]), Gateway(*g)) for g in
          (27,  800, False),
          (32,  160, False),
         ])
-for key, value in GATEWAYS.items():
-    globals()[key] = value
 
 DEFAULTS = dict((zip(SETTINGS, [None] * len(SETTINGS))))
-DEFAULTS[GATEWAY] = _22
+DEFAULTS[GATEWAY] = GATEWAYS[str(22)]
 DEFAULT_CONFIG_FILE = "~/.fullsms"
 
 CODES = {
@@ -585,6 +583,11 @@ def set_setting(setting, conf, cli):
         debug("No value for '%s' found anywhere" % setting)
     return val
 
+def check_gateway(str_):
+    """ Ensure that the gateway is valid. """
+    if str(str_) not in GATEWAYS.keys():
+        raise ValueError("Gateway: '%s' is not defined." % str_)
+
 if __name__ == '__main__':
     (opt, flags, extra) = parser.parse(sys.argv[1:])
     if not sum([x is not None for x in (opt.debug, opt.quiet)]) <= 1:
@@ -646,6 +649,10 @@ if __name__ == '__main__':
             error("Failed checking, error code: %d - %s"
                     % (result, CODES[result]))
     elif sub == SEND:
+        try:
+            check_gateway(params[GATEWAY])
+        except ValueError as ve:
+            error(ve)
         mess = ' '.join(extra[1:])
         debug("Message: '%s'" % mess)
         if len(mess) == 0:
