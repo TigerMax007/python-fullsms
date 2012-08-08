@@ -328,7 +328,9 @@ GATEWAY  = 'gateway'
 RECEIVER = 'receiver'
 SENDER   = 'sender'
 PHONEBOOK = 'phonebook'
+# settings only relevant for the fullsms http interface
 API_SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
+# all settings
 SETTINGS = API_SETTINGS + [PHONEBOOK]
 
 class Gateway(object):
