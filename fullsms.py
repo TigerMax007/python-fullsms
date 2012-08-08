@@ -394,6 +394,8 @@ CODES = {
 SEND = 'send'
 CHECK = 'check'
 SUBS = [SEND, CHECK]
+def default(str_):
+    return "(default '%s')" % str_
 optspec = """
 sms %s [OPTIONS] <message...>
 --
@@ -401,18 +403,17 @@ sms %s [OPTIONS] <message...>
 q,quiet     silence all outpt
 d,debug     activate debugging
 h,help      display help and exit
-c,config=   the config file to use (default: '%s')
+c,config=   the config file to use %s
 y,dry-run   don't perform any REST calls
  for all subcommands
 u,user=     the fullsms.de username
 p,password= the fullsms.de password
  for 'send' only
-g,gateway=  the gateway to use (default: '%s')
+g,gateway=  the gateway to use %s
 r,receiver= the person to send the message to
 s,sender=   the sender to use
-""" % ('[' + ' | '.join(SUBS) + ']',
-        DEFAULT_CONFIG_FILE,
-        DEFAULTS[GATEWAY])
+""" % tuple(['[' + ' | '.join(SUBS) + ']'] + 
+        map(default, (DEFAULT_CONFIG_FILE, DEFAULTS[GATEWAY])))
 parser = Options(optspec)
 
 def info(message):
