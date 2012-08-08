@@ -435,7 +435,9 @@ def error(message):
     sys.exit(2)
 
 class UnknownSettingError(Exception):
+    """ Raised when an unknown setting is encounterd in a config file. """
     pass
+
 
 def open_config(config_filename=DEFAULT_CONFIG_FILE):
     """ Open a config-file.
