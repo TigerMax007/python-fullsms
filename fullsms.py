@@ -329,14 +329,38 @@ RECEIVER = 'receiver'
 SENDER   = 'sender'
 SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
 
-GATEWAYS = dict(('_'+str(g), g) for g in [11, 26, 31, 12, 22, 27, 32])
+class Gateway(object):
+    """ Simple object to store gateway attributes.
+
+    Parameters
+    ----------
+    id_ : int
+        the integer identifier
+    limit : int
+        the maximum allowed message length for this gateway
+    own: bool
+        if the gateway allows setting 'sender'
+    """
+    def __init__(self, id_, limit, own):
+        self.id_, self.limit, self.own = id_, limit, own
+    def __str__(self):
+        return str(self.id_)
+
+GATEWAYS = dict(('_'+str(g[0]), Gateway(*g)) for g in
+        [(11, 1560, True ),
+         (26,  800, False),
+         (31,  160, False),
+         (12, 1560, True ),
+         (22,  800, True ),
+         (27,  800, False),
+         (32,  160, False),
+        ])
 for key, value in GATEWAYS.items():
     globals()[key] = value
 
 DEFAULTS = dict((zip(SETTINGS, [None] * len(SETTINGS))))
 DEFAULTS[GATEWAY] = _22
 DEFAULT_CONFIG_FILE = "~/.fullsms"
-
 
 CODES = {
     200 : 'OK',
