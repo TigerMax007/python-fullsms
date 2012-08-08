@@ -654,7 +654,7 @@ if __name__ == '__main__':
         locals()[s] = params[s] = set_setting(s, config_file_settings, opt)
 
     if user is None or password is None:
-        fatal('No username or password')
+        fatal('No username and/or password')
     elif sub == CHECK:
         debug("Ignoring: '%s' for '%s'" %
                 ([s for s in (SENDER, RECEIVER, GATEWAY)
