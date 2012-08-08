@@ -752,19 +752,18 @@ if __name__ == '__main__':
             if receiver in contacts:
                 debug("Expanding receiver '%s' to '%s' via phonebook"
                         % (receiver, contacts[receiver]))
-                receiver = contacts[receiver]
+                receiver = params[RECEIVER] = contacts[receiver]
             else:
                 debug("Receiver value '%s' not found in phonebook" % receiver)
             if expand:
                 if sender in contacts:
                     debug("Expanding sender '%s' to '%s' via phonebook"
                             % (sender, contacts[sender]))
-                    sender = contacts[sender]
+                    sender = params[SENDER] = contacts[sender]
                 else:
                     debug("Sender value '%s' not found in phonebook" % receiver)
             else:
                 debug("Not attempting to expand the sender")
-
 
         # perform the sending
         code, result = send(**params)
