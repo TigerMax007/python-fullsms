@@ -711,10 +711,13 @@ if __name__ == '__main__':
             error("Failed checking, error code: %d - %s"
                     % (result, CODES[result]))
     elif sub == SEND:
+        # chck the gateway argument
         try:
             gateway = check_gateway(params[GATEWAY])
         except ValueError as ve:
             fatal(ve)
+
+        # prepare the message and check its validity
         mess = ' '.join(extra[1:])
         mess_len = len(mess)
         debug("Message: '%s', length: '%d'" % (mess, mess_len))
@@ -724,13 +727,18 @@ if __name__ == '__main__':
             fatal("Message too long: '%d', gateway has max length: '%d'"
                     % (mess_len, gateway.limit))
         params['message'] = mess
+
+        # check the sende argument
         try:
             check_sender(sender)
         except ValueError as ve:
             fatal(ve)
+
+        # make sure we have some kind fo receiver
         if receiver is None:
             fatal('No receiver')
-        # deal with the phonebook
+
+        # try to open the phonebook and expand the receiver
         try:
             with open_config(phonebook) as phonebook_fp:
                 contacts = parse_phonebook(phonebook_fp)
@@ -742,7 +750,12 @@ if __name__ == '__main__':
                 debug("Expanding '%s' to '%s' via phonebook"
                         % (receiver, contacts[receiver]))
                 receiver = contacts[receiver]
+            else:
+                debug("Value '%s' not found in phonebook" % receiver)
+
+        # perform the sending
         code, result = send(**params)
+
         # HTTP return code seems always to be 200
         # check result instead
         result = int(result)
