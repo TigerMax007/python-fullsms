@@ -331,8 +331,8 @@ SENDER    = 'sender'
 API_SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
 # all settings
 PHONEBOOK = 'phonebook'
-EXPAND    = 'expand'
-SETTINGS = API_SETTINGS + [PHONEBOOK, EXPAND]
+NO_EXPAND = 'no_expand'
+SETTINGS = API_SETTINGS + [PHONEBOOK, NO_EXPAND]
 
 class Gateway(object):
     """ Simple object to store gateway attributes.
@@ -366,7 +366,7 @@ DEFAULTS[GATEWAY] = GATEWAYS[str(22)]
 DEFAULT_CONFIG_FILE = "~/.fullsms"
 DEFAULT_PHONE_BOOK = "~/.fullsms-book"
 DEFAULTS[PHONEBOOK] = DEFAULT_PHONE_BOOK
-DEFAULTS[EXPAND] = True
+DEFAULTS[NO_EXPAND] = False
 
 QUIET = False
 DEBUG = False
@@ -700,7 +700,7 @@ if __name__ == '__main__':
         fatal('No username and/or password')
     elif subcommand == CHECK:
         debug("Ignoring: '%s' for '%s'" %
-                ([s for s in (SENDER, RECEIVER, GATEWAY, PHONEBOOK)
+                ([s for s in (SENDER, RECEIVER, GATEWAY, PHONEBOOK, NO_EXPAND)
                     if locals()[s] is not None],
                     CHECK))
         code, result = check(user, password)
@@ -755,7 +755,7 @@ if __name__ == '__main__':
                 receiver = params[RECEIVER] = contacts[receiver]
             else:
                 debug("Receiver value '%s' not found in phonebook" % receiver)
-            if expand:
+            if not no_expand:
                 if sender in contacts:
                     debug("Expanding sender '%s' to '%s' via phonebook"
                             % (sender, contacts[sender]))
