@@ -391,7 +391,6 @@ CODES = {
     DRY_RUN_CODE : "No REST call made, probably using '--dry-run'"
         }
 
-
 SEND = 'send'
 CHECK = 'check'
 SUBS = [SEND, CHECK]
@@ -443,7 +442,6 @@ def error(message):
 class UnknownSettingError(Exception):
     """ Raised when an unknown setting is encounterd in a config file. """
     pass
-
 
 def open_config(config_filename=DEFAULT_CONFIG_FILE):
     """ Open a config-file.
