@@ -322,16 +322,16 @@ class Options:
 
 BASE_URL = "https://www.fullsms.de/gw/"
 
+# settings only relevant for the fullsms http interface
 USER      = 'user'
 PASSWORD  = 'password'
 GATEWAY   = 'gateway'
 RECEIVER  = 'receiver'
 SENDER    = 'sender'
-# settings only relevant for the fullsms http interface
 API_SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
+# all settings
 PHONEBOOK = 'phonebook'
 EXPAND    = 'expand'
-# all settings
 SETTINGS = API_SETTINGS + [PHONEBOOK, EXPAND]
 
 class Gateway(object):
