@@ -327,7 +327,11 @@ PASSWORD = 'password'
 GATEWAY  = 'gateway'
 RECEIVER = 'receiver'
 SENDER   = 'sender'
-SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
+PHONEBOOK = 'phonebook'
+# settings only relevant for the fullsms http interface
+API_SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
+# all settings
+SETTINGS = API_SETTINGS + [PHONEBOOK]
 
 class Gateway(object):
     """ Simple object to store gateway attributes.
@@ -359,6 +363,8 @@ GATEWAYS = dict((str(g[0]), Gateway(*g)) for g in
 DEFAULTS = dict((zip(SETTINGS, [None] * len(SETTINGS))))
 DEFAULTS[GATEWAY] = GATEWAYS[str(22)]
 DEFAULT_CONFIG_FILE = "~/.fullsms"
+DEFAULT_PHONE_BOOK = "~/.fullsms-book"
+DEFAULTS[PHONEBOOK] = DEFAULT_PHONE_BOOK
 
 QUIET = False
 DEBUG = False
@@ -412,6 +418,7 @@ p,password= the fullsms.de password
 g,gateway=  the gateway to use %s
 r,receiver= the person to send the message to
 s,sender=   the sender to use
+b,phonebook= the phonebook file
 """ % tuple(['[' + ' | '.join(SUBS) + ']'] + 
         map(default, (DEFAULT_CONFIG_FILE, DEFAULTS[GATEWAY])))
 parser = Options(optspec)
@@ -444,14 +451,13 @@ class UnknownSettingError(Exception):
     """ Raised when an unknown setting is encounterd in a config file. """
     pass
 
-def open_config(config_filename=DEFAULT_CONFIG_FILE):
+def open_config(config_filename):
     """ Open a config-file.
 
     Parameters
     ----------
     config_filename : str
         the path to and name of the config file
-        (uses module default)
 
     Raises
     ------
@@ -495,6 +501,37 @@ def parse_config(config_fp, section='settings'):
                 "Setting '%s' from conf file '%s' not recognized!"
                     % (key, config_fp.name))
     return sets
+
+def parse_phonebook(phonebook_fp, section='contacts'):
+    """ Parse the phonebook.
+
+    Parameters
+    ----------
+    phonebook_fp : file-like
+        the file-pointer to the phonebook file
+    section : str
+        the section of the entries, default: 'contacts'
+
+    Returns
+    -------
+    contacts : dict str -> str
+        the contacts name -> number
+
+    Raises
+    ------
+    NoSectionError
+        if no section with the name 'section' is present
+    """
+    cp = ConfigParser.RawConfigParser()
+    cp.readfp(phonebook_fp)
+    contacts = dict(cp.items(section))
+    if DEBUG:
+        max_len = max(map(len, contacts.keys())) + 4
+        debug("Phonebook at '%s' has the following entries:"
+                % phonebook_fp.name)
+        for name, number  in contacts.items():
+            debug('%s : %s' % (name.ljust(max_len), number))
+    return contacts
 
 def assemble_rest_call(function, parameters):
     """ Create a URL suitable for making a REST call to fullsms.de
@@ -634,7 +671,7 @@ if __name__ == '__main__':
             dict((zip(SETTINGS, [None] * len(SETTINGS)))), {}
     # try opening the config file
     try:
-        config_fp = open_config(config_filename=config_filename)
+        config_fp = open_config(config_filename)
         debug("Config file at '%s'" % config_fp.name)
     except IOError:
         debug("No config file at '%s'" % config_filename)
@@ -651,13 +688,16 @@ if __name__ == '__main__':
             config_fp.close()
     # select the setting with the highest precedence
     for s in SETTINGS:
-        locals()[s] = params[s] = set_setting(s, config_file_settings, opt)
+        locals()[s] = set_setting(s, config_file_settings, opt)
+        if s in API_SETTINGS:
+            params[s] = locals()[s]
+
 
     if user is None or password is None:
         fatal('No username and/or password')
     elif sub == CHECK:
         debug("Ignoring: '%s' for '%s'" %
-                ([s for s in (SENDER, RECEIVER, GATEWAY)
+                ([s for s in (SENDER, RECEIVER, GATEWAY, PHONEBOOK)
                     if locals()[s] is not None],
                     CHECK))
         code, result = check(user, password)
@@ -671,10 +711,13 @@ if __name__ == '__main__':
             error("Failed checking, error code: %d - %s"
                     % (result, CODES[result]))
     elif sub == SEND:
+        # check the gateway argument
         try:
             gateway = check_gateway(params[GATEWAY])
         except ValueError as ve:
             fatal(ve)
+
+        # prepare the message and check its validity
         mess = ' '.join(extra[1:])
         mess_len = len(mess)
         debug("Message: '%s', length: '%d'" % (mess, mess_len))
@@ -684,13 +727,35 @@ if __name__ == '__main__':
             fatal("Message too long: '%d', gateway has max length: '%d'"
                     % (mess_len, gateway.limit))
         params['message'] = mess
+
+        # check the sender argument
         try:
             check_sender(sender)
         except ValueError as ve:
             fatal(ve)
+
+        # make sure we have some kind of receiver
         if receiver is None:
             fatal('No receiver')
+
+        # try to open the phonebook and expand the receiver
+        try:
+            with open_config(phonebook) as phonebook_fp:
+                contacts = parse_phonebook(phonebook_fp)
+        except IOError:
+            debug("No phonebook at: '%s'" % phonebook)
+        else:
+            # try to expand receiver from the phone book
+            if receiver in contacts:
+                debug("Expanding '%s' to '%s' via phonebook"
+                        % (receiver, contacts[receiver]))
+                receiver = contacts[receiver]
+            else:
+                debug("Value '%s' not found in phonebook" % receiver)
+
+        # perform the sending
         code, result = send(**params)
+
         # HTTP return code seems always to be 200
         # check result instead
         result = int(result)
