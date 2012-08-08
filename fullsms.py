@@ -692,6 +692,13 @@ if __name__ == '__main__':
         if s in API_SETTINGS:
             params[s] = locals()[s]
 
+    # deal with the phonebook
+    try:
+        with open_config(phonebook) as phonebook_fp:
+            contacts = parse_phonebook(phonebook_fp)
+    except IOError:
+        debug("No phonebook at: '%s'" % phonebook)
+
     if user is None or password is None:
         fatal('No username and/or password')
     elif sub == CHECK:
