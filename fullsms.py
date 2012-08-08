@@ -526,11 +526,11 @@ def parse_phonebook(phonebook_fp, section='contacts'):
     cp.readfp(phonebook_fp)
     contacts = dict(cp.items(section))
     if DEBUG:
-        max_len = max(contacts.keys()) + 4
+        max_len = max(map(len, contacts.keys())) + 4
         debug("Phonebook at '%s' has the following entries:"
                 % phonebook_fp.name)
-        for name, number  in contacts.iter_values():
-            debug('%s : %s', (k.ljust(max_len), number))
+        for name, number  in contacts.items():
+            debug('%s : %s' % (name.ljust(max_len), number))
     return contacts
 
 def assemble_rest_call(function, parameters):
