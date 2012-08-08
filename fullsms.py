@@ -405,7 +405,7 @@ SUBS = [SEND, CHECK]
 def default(str_):
     return "(default '%s')" % str_
 optspec = """
-sms %s [OPTIONS] <message...>
+%s %s [OPTIONS] <message...>
 --
  general program options
 q,quiet       silence all outpt
@@ -423,7 +423,7 @@ s,sender=     the sender to use
  phonebook management
 b,phonebook=  the phonebook file
 e,no-expand   do not expand sender from the phonebook
-""" % tuple(['[' + ' | '.join(SUBS) + ']'] +
+""" % tuple([sys.argv[0],'[' + ' | '.join(SUBS) + ']'] +
         map(default, (DEFAULT_CONFIG_FILE, DEFAULTS[GATEWAY])))
 parser = Options(optspec)
 
