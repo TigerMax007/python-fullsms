@@ -45,7 +45,7 @@ The ``python-fullsms`` can easily be used as a python module::
     (200 : 'OK')
 
     >>> fullsms.check(user=MaxMusterman, password=maxmustermangeheim)
-    The current balance for the account 'MaxMusterman' is: 12.571 €
+    (200, '12.571'
 
 Example Config
 ==============
