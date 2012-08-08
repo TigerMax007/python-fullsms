@@ -546,18 +546,18 @@ def set_setting(setting, conf, cli):
     Will issues debug and warning messages when overriding.
 
     """
-    order = [('default',      DEFAULTS),
+    order = [('defaults',      DEFAULTS),
              ('conf file',    conf),
-             ('command line', cli)]
+             ('command line args', cli)]
     prev, val, prev_val = None, None, None
     for desc, container in order:
         if container[setting] is not None:
             prev_val, val = val, container[setting]
             if prev_val is not None:
-                debug("Value for '%s' found on %s, overrides %s: '%s'"
+                debug("Value for '%s' found in '%s', overrides setting from '%s': '%s'"
                         % (setting, desc, prev, val))
             else:
-                debug("Value for '%s' found in %s: '%s'"
+                debug("Value for '%s' found in '%s': '%s'"
                         % (setting, desc, val))
         prev = desc
     if val is None:
