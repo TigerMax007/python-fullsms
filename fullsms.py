@@ -600,6 +600,14 @@ def check_gateway(str_):
     except KeyError:
         raise ValueError("Gateway: '%s' is not defined." % str_)
 
+def check_sender(str_):
+    """ Check sender format. """
+    if not (re.search(r"^[0-9]{0,15}$", str(str_)) or
+            re.search(r"^\w{0,15}$", str(str_))):
+        raise ValueError(
+            "Sender should be 11 alphanumeric or 15 numeric characters, " +\
+                    "but was: '%s'" % str_)
+
 if __name__ == '__main__':
     (opt, flags, extra) = parser.parse(sys.argv[1:])
     if not sum([x is not None for x in (opt.debug, opt.quiet)]) <= 1:
@@ -676,6 +684,10 @@ if __name__ == '__main__':
             fatal("Message too long: '%d', gateway has max length: '%d'"
                     % (mess_len, gateway.limit))
         params['message'] = mess
+        try:
+            check_sender(sender)
+        except ValueError as ve:
+            fatal(ve)
         if receiver is None:
             fatal('No receiver')
         code, result = send(**params)
