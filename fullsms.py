@@ -652,13 +652,17 @@ if __name__ == '__main__':
                     % (result, CODES[result]))
     elif sub == SEND:
         try:
-            check_gateway(params[GATEWAY])
+            gateway = check_gateway(params[GATEWAY])
         except ValueError as ve:
             error(ve)
         mess = ' '.join(extra[1:])
-        debug("Message: '%s'" % mess)
-        if len(mess) == 0:
-            fatal('No message to send')
+        mess_len = len(mess)
+        debug("Message: '%s', length: '%d'" % (mess, mess_len))
+        if mess_len == 0:
+            error('No message to send')
+        if mess_len > gateway.limit:
+            error("Message too long: '%d', gateway has max length: '%d'"
+                    % (mess_len, gateway.limit))
         params['message'] = mess
         if receiver is None:
             fatal('No receiver')
