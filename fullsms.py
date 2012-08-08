@@ -662,9 +662,9 @@ if __name__ == '__main__':
         DRY_RUN = True
     if len(extra) == 0:
         fatal('No subcommand given')
-    sub = extra[0]
-    if sub not in SUBS:
-        fatal("invalid subcommand: %s" % sub)
+    subcommand = extra[0]
+    if subcommand not in SUBS:
+        fatal("invalid subcommand: %s" % subcommand)
 
     # empty config_file pointer
     config_fp = None
@@ -698,7 +698,7 @@ if __name__ == '__main__':
 
     if user is None or password is None:
         fatal('No username and/or password')
-    elif sub == CHECK:
+    elif subcommand == CHECK:
         debug("Ignoring: '%s' for '%s'" %
                 ([s for s in (SENDER, RECEIVER, GATEWAY, PHONEBOOK)
                     if locals()[s] is not None],
@@ -713,7 +713,7 @@ if __name__ == '__main__':
             result = int(result)
             error("Failed checking, error code: %d - %s"
                     % (result, CODES[result]))
-    elif sub == SEND:
+    elif subcommand == SEND:
         # check the gateway argument
         try:
             gateway = check_gateway(params[GATEWAY])
