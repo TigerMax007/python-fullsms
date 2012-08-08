@@ -533,7 +533,7 @@ def parse_phonebook(phonebook_fp, section='contacts'):
         max_len = max(map(len, contacts.keys())) + 4
         debug("Phonebook at '%s' has the following entries:"
                 % phonebook_fp.name)
-        for name, number  in contacts.items():
+        for name, number  in sorted(contacts.items()):
             debug('%s : %s' % (name.ljust(max_len), number))
     return contacts
 
