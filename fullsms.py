@@ -609,8 +609,7 @@ if __name__ == '__main__':
 
     if user is None or password is None:
         fatal('No username or password')
-
-    if sub == CHECK:
+    elif sub == CHECK:
         debug("Ignoring: '%s' for '%s'" %
                 ([s for s in (SENDER, RECEIVER, GATEWAY)
                     if locals()[s] is not None],
