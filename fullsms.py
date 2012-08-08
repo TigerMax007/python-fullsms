@@ -328,7 +328,7 @@ GATEWAY  = 'gateway'
 RECEIVER = 'receiver'
 SENDER   = 'sender'
 PHONEBOOK = 'phonebook'
-SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
+SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER, PHONEBOOK]
 
 class Gateway(object):
     """ Simple object to store gateway attributes.
@@ -361,6 +361,7 @@ DEFAULTS = dict((zip(SETTINGS, [None] * len(SETTINGS))))
 DEFAULTS[GATEWAY] = GATEWAYS[str(22)]
 DEFAULT_CONFIG_FILE = "~/.fullsms"
 DEFAULT_PHONE_BOOK = "~/.fullsms-book"
+DEFAULTS[PHONEBOOK] = DEFAULT_PHONE_BOOK
 
 QUIET = False
 DEBUG = False
@@ -690,7 +691,7 @@ if __name__ == '__main__':
         fatal('No username and/or password')
     elif sub == CHECK:
         debug("Ignoring: '%s' for '%s'" %
-                ([s for s in (SENDER, RECEIVER, GATEWAY)
+                ([s for s in (SENDER, RECEIVER, GATEWAY, PHONEBOOK)
                     if locals()[s] is not None],
                     CHECK))
         code, result = check(user, password)
