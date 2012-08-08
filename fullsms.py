@@ -378,11 +378,12 @@ h,help      display help and exit
  for all subcommands
 u,user=     the fullsms.de username
 p,password= the fullsms.de password
+c,config= the config file to use (default: '%s')
  for 'send' only
 g,gateway=  the gateway to use
 r,receiver= the person to send the message to
 s,sender=   the sender to use
-""" % ('[' + ' | '.join(SUBS) + ']')
+""" % ('[' + ' | '.join(SUBS) + ']', DEFAULT_CONFIG_FILE)
 parser = Options(optspec)
 
 def info(message):
@@ -580,15 +581,17 @@ if __name__ == '__main__':
 
     # empty config_file pointer
     config_fp = None
+    config_filename = opt.config if opt.config is not None \
+            else DEFAULT_CONFIG_FILE
     # settings dict with all None and empty params dict
     config_file_settings, params = \
             dict((zip(SETTINGS, [None] * len(SETTINGS)))), {}
     # try opening the config file
     try:
-        config_fp = open_config()
+        config_fp = open_config(config_filename=config_filename)
         debug("Config file at '%s'" % config_fp.name)
     except IOError:
-        debug("No config file at '%s'" % DEFAULT_CONFIG_FILE)
+        debug("No config file at '%s'" % config_filename)
     else:
         try:
             # read the settings from the file
