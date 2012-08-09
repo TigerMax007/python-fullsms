@@ -334,7 +334,8 @@ CHECK_SETTINGS = [USER, PASSWORD]
 # all settings
 PHONEBOOK = 'phonebook'
 EXPAND = 'expand'
-SETTINGS = API_SETTINGS + [PHONEBOOK, EXPAND]
+IGNORE = 'ignore'
+SETTINGS = API_SETTINGS + [PHONEBOOK, EXPAND, IGNORE]
 
 class Gateway(object):
     """ Simple object to store gateway attributes.
@@ -425,6 +426,7 @@ s,sender=     the sender to use
  phonebook management
 b,phonebook=  the phonebook file %s
 e,expand      expand sender from the phonebook
+i,ignore      ignore errors when expanding receiver
 """ % tuple([sys.argv[0],'[' + ' | '.join(SUBS) + ']'] +
         map(default, (DEFAULT_CONFIG_FILE,
                       DEFAULTS[GATEWAY],
