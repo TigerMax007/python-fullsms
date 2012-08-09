@@ -329,6 +329,8 @@ GATEWAY   = 'gateway'
 RECEIVER  = 'receiver'
 SENDER    = 'sender'
 API_SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
+# settings relevant only for 'check'
+CHECK_SETTINGS = [USER, PASSWORD]
 # all settings
 PHONEBOOK = 'phonebook'
 EXPAND = 'expand'
