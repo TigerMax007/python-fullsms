@@ -760,8 +760,10 @@ if __name__ == '__main__':
                 debug("Expanding receiver '%s' to '%s' via phonebook"
                         % (receiver, contacts[receiver]))
                 receiver = params[RECEIVER] = contacts[receiver]
-            else:
-                debug("Receiver value '%s' not found in phonebook" % receiver)
+            elif ignore:
+                debug("Ignoring: receiver value '%s' not found in phonebook" % receiver)
+            elif not ignore:
+                error("Receiver value '%s' not found in phonebook" % receiver)
             if expand:
                 if sender in contacts:
                     debug("Expanding sender '%s' to '%s' via phonebook"
