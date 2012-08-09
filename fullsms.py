@@ -762,7 +762,7 @@ if __name__ == '__main__':
                 receiver = params[RECEIVER] = contacts[receiver]
             elif ignore:
                 debug("Ignoring: receiver value '%s' not found in phonebook" % receiver)
-            elif not ignore:
+            else:
                 error("Receiver value '%s' not found in phonebook" % receiver)
             if expand:
                 if sender in contacts:
