@@ -67,6 +67,30 @@ Default settings can be stored in the file ``~/.fullsms``::
 Note: If you wish to use an alternative file, use the ``[-c | --config]``
 switch.
 
+Phonebook
+=========
+
+A rudimentary phonebook file is supported. By default, the script searches
+``~/.fullsms-book`` for entries in a section titled ``contacts``::
+
+    [contacts]
+    max = 0123456789
+    maxine = 1234567890
+    maximilian = 2345678901
+
+Thus you can use these defined aliases on the command line::
+
+    $ sms send -r maxine "Hello honey, I'm home"
+
+Using the ``[-e | --expand]`` command-line switch to expand the sender from the
+phonebook too, the following will send a message to ``maxine`` looking like it
+came from ``maximilian``::
+
+    $ sms send -r maxine -s maximilian "Any plans for tonight?"
+
+Note however, that setting an arbitrary sender may or may not be supported by
+the gateway.
+
 Author and Copyright
 ====================
 
