@@ -421,10 +421,12 @@ g,gateway=    the gateway to use %s
 r,receiver=   the person to send the message to
 s,sender=     the sender to use
  phonebook management
-b,phonebook=  the phonebook file
+b,phonebook=  the phonebook file %s
 e,no-expand   do not expand sender from the phonebook
 """ % tuple([sys.argv[0],'[' + ' | '.join(SUBS) + ']'] +
-        map(default, (DEFAULT_CONFIG_FILE, DEFAULTS[GATEWAY])))
+        map(default, (DEFAULT_CONFIG_FILE,
+                      DEFAULTS[GATEWAY],
+                      DEFAULT_PHONE_BOOK)))
 parser = Options(optspec)
 
 def info(message):
