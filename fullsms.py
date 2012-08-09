@@ -331,8 +331,8 @@ SENDER    = 'sender'
 API_SETTINGS = [USER, PASSWORD, GATEWAY, RECEIVER, SENDER]
 # all settings
 PHONEBOOK = 'phonebook'
-NO_EXPAND = 'no_expand'
-SETTINGS = API_SETTINGS + [PHONEBOOK, NO_EXPAND]
+EXPAND = 'expand'
+SETTINGS = API_SETTINGS + [PHONEBOOK, EXPAND]
 
 class Gateway(object):
     """ Simple object to store gateway attributes.
@@ -366,7 +366,7 @@ DEFAULTS[GATEWAY] = GATEWAYS[str(22)]
 DEFAULT_CONFIG_FILE = "~/.fullsms"
 DEFAULT_PHONE_BOOK = "~/.fullsms-book"
 DEFAULTS[PHONEBOOK] = DEFAULT_PHONE_BOOK
-DEFAULTS[NO_EXPAND] = False
+DEFAULTS[EXPAND] = False
 
 QUIET = False
 DEBUG = False
@@ -422,7 +422,7 @@ r,receiver=   the person to send the message to
 s,sender=     the sender to use
  phonebook management
 b,phonebook=  the phonebook file %s
-e,no-expand   do not expand sender from the phonebook
+e,expand      expand sender from the phonebook
 """ % tuple([sys.argv[0],'[' + ' | '.join(SUBS) + ']'] +
         map(default, (DEFAULT_CONFIG_FILE,
                       DEFAULTS[GATEWAY],
@@ -757,7 +757,7 @@ if __name__ == '__main__':
                 receiver = params[RECEIVER] = contacts[receiver]
             else:
                 debug("Receiver value '%s' not found in phonebook" % receiver)
-            if not no_expand:
+            if expand:
                 if sender in contacts:
                     debug("Expanding sender '%s' to '%s' via phonebook"
                             % (sender, contacts[sender]))
