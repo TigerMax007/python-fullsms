@@ -706,7 +706,8 @@ if __name__ == '__main__':
         fatal('No username and/or password')
     elif subcommand == CHECK:
         debug("Ignoring: '%s' for '%s'" %
-                ([s for s in (SENDER, RECEIVER, GATEWAY, PHONEBOOK, NO_EXPAND)
+                ([s for s in
+                    sorted(list(set(SETTINGS).difference(set(CHECK_SETTINGS))))
                     if locals()[s] is not None],
                     CHECK))
         code, result = check(user, password)
