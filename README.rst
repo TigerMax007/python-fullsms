@@ -13,7 +13,12 @@ account of the author of ``fullsms.py`` with ``15,00 €``.
 Example command line usage.
 ==========================
 
-Send a text message::
+Under the assumption that a correct ``user`` and ``password`` are stored in the
+config file (see below), the two subcommands ``send`` to send a message and
+``check`` to the check the balance for an account can be used as follows:
+
+Send a text message, specifying the recipient with the ``[-r | --receiver]``
+switch::
 
     $ sms send -r 0123456789 "Hello honey, I'm home"
 
