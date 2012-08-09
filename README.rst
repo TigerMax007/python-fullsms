@@ -10,7 +10,7 @@ using the following link `https://www.fullsms.de/?ref=101584
 <https://www.fullsms.de/?ref=101584>`_ to register. This will credit the
 account of the author of ``fullsms.py`` with ``15,00 €``.
 
-Example command line usage.
+Example command line usage
 ==========================
 
 Under the assumption that a correct ``user`` and ``password`` are stored in the
