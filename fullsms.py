@@ -568,7 +568,7 @@ def call(str_):
         file_like = urllib.urlopen(str_)
         return int(file_like.getcode()), file_like.read()
     else:
-        return DRY_RUN_CODE, DRY_RUN_CODE
+        return DRY_RUN_CODE, str(DRY_RUN_CODE)
 
 def assemble_send_str(params):
     """ Turn params dict into URL for send. """
