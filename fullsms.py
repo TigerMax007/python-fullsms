@@ -763,7 +763,7 @@ if __name__ == '__main__':
                             % (sender, contacts[sender]))
                     sender = params[SENDER] = contacts[sender]
                 else:
-                    debug("Sender value '%s' not found in phonebook" % receiver)
+                    debug("Sender value '%s' not found in phonebook" % sender)
             else:
                 debug("Not attempting to expand the sender")
 
