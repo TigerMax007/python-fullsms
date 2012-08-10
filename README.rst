@@ -10,6 +10,30 @@ using the following link `https://www.fullsms.de/?ref=101584
 <https://www.fullsms.de/?ref=101584>`_ to register. This will credit the
 account of the author of ``fullsms.py`` with ``15,00 €``.
 
+Synposis
+--------
+
+There are two subcommands ``check`` and ``send``::
+
+    $ sms [GENERAL-OPTIONS] < check | send > [SPECIFIC-OPTIONS]
+
+The specific invocations are::
+
+    $ sms -h
+    $ sms -v
+    $ sms [ -q | -d ] [ -y ] [ -c <config> ] check
+          [ -u <user> ] [ -p <password> ]
+    $ sms [ -q | -d ] [ -y ] [ -c <config> ] send
+          [ -u <user> ] [ -p <password> ]
+          [ -g <gateway> ] [ -r <receiver> ] [ -s <sender> ]
+          [ -p <phonebook> ] [ -e ] [ -i ]
+          <message>
+
+Because of the way ``options.py`` works, the general program options and
+subcommand options can be mixed and can be placed before or after the
+subcommand itself. Also, options which are relevant only for ``send`` can be
+given when using ``check`` and will be silently ignored.
+
 Example command line usage
 --------------------------
 
