@@ -67,6 +67,15 @@ def test_parse_config():
     config_file = make_tempfile(test_config_bogus)
     nt.assert_raises(sms.UnknownSettingError, sms.parse_config,
             config_file)
+    test_bools = textwrap.dedent("""
+    [settings]
+    expand = true
+    ignore = false
+    """)
+    config_file = make_tempfile(test_bools)
+    expected = {'ignore': False, 'expand': True}
+    nt.assert_equal(sms.parse_config(config_file), expected)
+
 
 def test_parse_phonebook():
     test_phonebook = textwrap.dedent("""

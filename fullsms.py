@@ -339,6 +339,7 @@ PHONEBOOK = 'phonebook'
 EXPAND = 'expand'
 IGNORE = 'ignore'
 SETTINGS = API_SETTINGS + [PHONEBOOK, EXPAND, IGNORE]
+BOOLEAN_SETTINGS = [EXPAND, IGNORE]
 
 class Gateway(object):
     """ Simple object to store gateway attributes.
@@ -511,13 +512,21 @@ def parse_config(config_fp, section='settings'):
     """
     cp = ConfigParser.RawConfigParser()
     cp.readfp(config_fp)
-    sets = dict(cp.items(section))
-    for key in sets.keys():
+    for key in cp.options(section):
         if key not in SETTINGS:
             raise UnknownSettingError(
                 "Setting '%s' from conf file '%s' not recognized!"
                     % (key, config_fp.name))
-    return sets
+    settings = {}
+    for setting in SETTINGS:
+        try:
+            if setting in BOOLEAN_SETTINGS:
+                settings[setting] = cp.getboolean(section, setting)
+            else:
+                settings[setting] = cp.get(section, setting)
+        except ConfigParser.NoOptionError:
+            pass
+    return settings
 
 def parse_phonebook(phonebook_fp, section='contacts'):
     """ Parse the phonebook.
