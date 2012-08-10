@@ -420,8 +420,8 @@ v,version     display version number and exit
  general program options
 q,quiet       silence all outpt
 d,debug       activate debugging
-c,config=     the config file to use %s
 y,dry-run     don't perform any REST calls
+c,config=     the config file to use %s
  for all subcommands
 u,user=       the fullsms.de username
 p,password=   the fullsms.de password
