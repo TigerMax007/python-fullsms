@@ -40,12 +40,11 @@ given when using ``check`` and will be silently ignored.
 Command Line Options
 --------------------
 
-* Descriptive options
-
-``-h, --help`` :
-    Display help and exit.
-``-v, --version`` :
-    Display version number and exit.
+Descriptive options :
+    ``-h, --help`` :
+        Display help and exit.
+    ``-v, --version`` :
+        Display version number and exit.
 
 * General program options
 
