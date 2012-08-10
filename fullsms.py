@@ -418,7 +418,7 @@ optspec = """
 h,help        display help and exit
 v,version     display version number and exit
  general program options
-q,quiet       silence all outpt
+q,quiet       silence all output
 d,debug       activate debugging
 y,dry-run     don't perform any REST calls
 c,config=     the config file to use %s
