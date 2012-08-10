@@ -414,11 +414,12 @@ PROG = sys.argv[0]
 optspec = """
 %s %s [OPTIONS] <message...>
 --
+ descriptive options
+h,help        display help and exit
+v,version     display version number and exit
  general program options
 q,quiet       silence all outpt
 d,debug       activate debugging
-h,help        display help and exit
-v,version     display version number and exit
 c,config=     the config file to use %s
 y,dry-run     don't perform any REST calls
  for all subcommands
