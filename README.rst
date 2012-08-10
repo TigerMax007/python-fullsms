@@ -88,6 +88,12 @@ Command Line Options
     behaviour. If you wish to disable this b default, consider using the config
     file.
 
+Note: since ``[-e | --expand]`` and ``[-i | --ignore]`` can also be specified
+in the config file, you may need a way to revert these if they are set to
+``true``. Courtesy of ``options.py`` we have the negation options
+``--no-expand`` and ``--no-ignore`` at no additional cost which will do exactly
+that.
+
 Config file
 -----------
 
