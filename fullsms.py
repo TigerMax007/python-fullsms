@@ -410,6 +410,7 @@ CHECK = 'check'
 SUBS = [SEND, CHECK]
 def default(str_):
     return "(default '%s')" % str_
+PROG = sys.argv[0]
 optspec = """
 %s %s [OPTIONS] <message...>
 --
@@ -430,7 +431,7 @@ s,sender=     the sender to use
 b,phonebook=  the phonebook file %s
 e,expand      expand sender from the phonebook
 i,ignore      ignore errors when expanding receiver
-""" % tuple([sys.argv[0],'[' + ' | '.join(SUBS) + ']'] +
+""" % tuple([PROG,'[' + ' | '.join(SUBS) + ']'] +
         map(default, (DEFAULT_CONFIG_FILE,
                       DEFAULTS[GATEWAY],
                       DEFAULT_PHONE_BOOK)))
