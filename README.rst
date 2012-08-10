@@ -52,8 +52,9 @@ Command Line Options
     Activate debugging. Will output noisly what is being done.
 :``-y, --dry-run``:
     Don't perform any REST calls. Useful in combination with ``-y, --dry-run``.
-:``-c, --config ...``:
-    The config file to use (default ``~/.fullsms``). Useful if you have multiple configurations.
+:``-c, --config <config>``:
+    The config file to use (default ``~/.fullsms``). Useful if you have
+    multiple configurations.
 
 * For all subcommands
 
