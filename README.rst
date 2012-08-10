@@ -37,9 +37,55 @@ given when using ``check`` and will be silently ignored.
 Command Line Options
 --------------------
 
-:``-h, --help``:
-   display help and exit
+* Descriptive options
 
+:``-h, --help``:
+    Display help and exit.
+:``-v, --version``:
+    Display version number and exit.
+
+* General program options
+
+:``-q, --quiet``:
+    Silence all output. Useful when executing the script from a cronjob.
+:``-d, --debug``:
+    Activate debugging. Will output noisly what is being done.
+:``-y, --dry-run``:
+    Don't perform any REST calls. Useful in combination with ``-y, --dry-run``.
+:``-c, --config <config>``:
+    The config file to use (default ``~/.fullsms``). Useful if you have
+    multiple configurations.
+
+* For all subcommands
+
+:``-u, --user <user>``:
+    The ``fullsms.de`` username.
+:``-p, --password <password>``:
+    The ``fullsms.de`` password.
+
+* For ``send`` only
+
+:``-g, --gateway <gateway>``:
+    The gateway to use (default ``22``). ``fullsms.de`` has multiple gateways,
+    see below for details.
+:``-r, --receiver <receiver>``:
+    The person to send the message to.
+:``-s, --sender <sender>``:
+    The sender to use. Can be 11 alphanumeric or 15 numric characters.
+
+* Phonebook management
+
+:``-b, --phonebook <phonebook>``:
+    The phonebook file (default ``~/.fullsms- book``). See below for details
+    about this file.
+:``-e, --expand``:
+    Expand sender from the phonebook. This means, that if the sender name is found
+    in the phonebook, the corresponding number will be used as a sender.
+:``-i, --ignore``:
+    Ignore errors when expanding receiver. The most common use case is to send
+    messages to people in your phonebook. To avoid typos, the script will abort
+    if the given receiver is not in your phone book. This option disables this
+    behaviour.
 
 Example command line usage
 --------------------------
