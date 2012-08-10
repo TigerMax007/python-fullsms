@@ -85,7 +85,52 @@ Command Line Options
     Ignore errors when expanding receiver. The most common use case is to send
     messages to people in your phonebook. To avoid typos, the script will abort
     if the given receiver is not in your phone book. This option disables this
-    behaviour.
+    behaviour. If you wish to disable this b default, consider using the config
+    file.
+
+Config file
+-----------
+
+``python-fullsms`` can be configured using a config file, usually located at
+``~/.fullsms`` and whose syntax is a common INI file and contains a single
+``settings`` section. The most common use case is to save the ``user``,
+``password`` and ``sender`` settings. This way, you need to specify only the
+receiver and the message on the command line.
+
+The settings given in the config file take precedence over the default values.
+Whereas the options given on the command line always take precedence over those
+given in the config file. Using the ``[-d | --debug]`` options shows exactly
+which settings where obtained from where and which ones took precedence.
+
+The following settings are supported in the config file which correspond
+directly to their command line counterparts:
+
+* ``user``
+* ``password``
+* ``gateway``
+* ``receiver``
+* ``sender``
+* ``phonebook``
+* ``expand``
+* ``ignore``
+
+The two settings ``expand`` and ``ignore`` are booleans and must take either
+the value ``True`` or ``False``.
+
+Example::
+
+    [settings]
+    user      = MaxMusterman
+    password  = maxmustermangeheim
+    gateway   = 11
+    receiver  = 0123456789
+    sender    = 0123456789
+    phonebook = ~/.mybook
+    expand    = False
+    ignore    = True
+
+Note: If you wish to use an alternative file, use the ``[-c | --config]``
+option.
 
 Example command line usage
 --------------------------
@@ -129,20 +174,6 @@ The ``python-fullsms`` can easily be used as a python module::
     >>> fullsms.check(user=MaxMusterman, password=maxmustermangeheim)
     (200, '12.571'
 
-Example Config
---------------
-
-Default settings can be stored in the file ``~/.fullsms``::
-
-    [settings]
-    user     = MaxMusterman
-    password = maxmustermangeheim
-    gateway  = 11
-    sender   = 0123456789
-    receiver = 0123456789
-
-Note: If you wish to use an alternative file, use the ``[-c | --config]``
-switch.
 
 Phonebook
 ---------
