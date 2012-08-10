@@ -412,7 +412,7 @@ def default(str_):
     return "(default '%s')" % str_
 PROG = sys.argv[0]
 optspec = """
-%s %s [OPTIONS] <message...>
+%s [GENERAL-OPTIONS] %s [SPECIFIC-OPTIONS] <message...>
 --
  descriptive options
 h,help        display help and exit
