@@ -34,6 +34,13 @@ subcommand options can be mixed and can be placed before or after the
 subcommand itself. Also, options which are relevant only for ``send`` can be
 given when using ``check`` and will be silently ignored.
 
+Command Line Options
+--------------------
+
+:``-h, --help``:
+   display help and exit
+
+
 Example command line usage
 --------------------------
 
