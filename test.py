@@ -19,7 +19,7 @@ def make_tempfile(text):
     return config_file
 
 def test_open_config():
-    nt.assert_raises(IOError, sms.open_config, "foo")
+    nt.assert_raises(IOError, sms.open_config, "filedoesnotexist")
 
 def test_parse_config():
 
