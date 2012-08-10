@@ -204,7 +204,7 @@ Using the ``[-e | --expand]`` command-line switch to expand the sender from the
 phonebook too, the following will send a message to ``maxine`` looking like it
 came from ``maximilian``::
 
-    $ sms send -r maxine -s maximilian "Any plans for tonight?"
+    $ sms send -r maxine -e -s maximilian "Any plans for tonight?"
 
 Note however, that setting an arbitrary sender may or may not be supported by
 the gateway.
