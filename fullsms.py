@@ -320,7 +320,7 @@ class Options:
 # options.py which was copied verbatim from bup ends here                     #
 ###############################################################################
 
-__version__ = '0.1-dev"
+__version__ = '0.1-dev'
 __author__  = 'Valentin Haenel'
 
 BASE_URL = "https://www.fullsms.de/gw/"
@@ -418,6 +418,7 @@ optspec = """
 q,quiet       silence all outpt
 d,debug       activate debugging
 h,help        display help and exit
+v,version     display version number and exit
 c,config=     the config file to use %s
 y,dry-run     don't perform any REST calls
  for all subcommands
@@ -661,6 +662,9 @@ def check_sender(str_):
 
 if __name__ == '__main__':
     (opt, flags, extra) = parser.parse(sys.argv[1:])
+    if opt.version:
+        print("%s (python-fullsms) version: %s" % (PROG, __version__))
+        sys.exit(0)
     if not sum([x is not None for x in (opt.debug, opt.quiet)]) <= 1:
         fatal("'debug' and 'quiet' are mutually exclusive.")
     if opt.debug:
