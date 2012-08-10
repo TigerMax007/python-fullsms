@@ -136,7 +136,7 @@ Example::
     expand    = False
     ignore    = True
 
-Note: If you wish to use an alternative file, use the ``[-c | --config]``
+Reminder: If you wish to use an alternative file, use the ``[-c | --config]``
 option.
 
 Example command line usage
