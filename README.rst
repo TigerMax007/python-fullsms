@@ -11,7 +11,7 @@ using the following link `https://www.fullsms.de/?ref=101584
 account of the author of ``fullsms.py`` with ``15,00 €``.
 
 Example command line usage
-==========================
+--------------------------
 
 Under the assumption that a correct ``user`` and ``password`` are stored in the
 config file (see below), the two subcommands ``send`` to send a message and
@@ -35,7 +35,7 @@ Note: if you are using the script from a cron-job you can silence the output
 using ``[-q | --quiet]`` switch.
 
 Example library usage
-=====================
+---------------------
 
 The ``python-fullsms`` can easily be used as a python module::
 
@@ -53,7 +53,7 @@ The ``python-fullsms`` can easily be used as a python module::
     (200, '12.571'
 
 Example Config
-==============
+--------------
 
 Default settings can be stored in the file ``~/.fullsms``::
 
@@ -68,7 +68,7 @@ Note: If you wish to use an alternative file, use the ``[-c | --config]``
 switch.
 
 Phonebook
-=========
+---------
 
 A rudimentary phonebook file is supported. By default, the script searches
 ``~/.fullsms-book`` for entries in a section titled ``contacts``::
@@ -92,7 +92,7 @@ Note however, that setting an arbitrary sender may or may not be supported by
 the gateway.
 
 Author and Copyright
-====================
+--------------------
 
 * ``fullsms.py`` is © 2012 Valentin Haenel, under a 2-Clause BSD license
 * ``options.py`` is © 2010-2012 Avery Pennarun, under a 2-Clause BSD license
