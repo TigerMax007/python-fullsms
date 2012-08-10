@@ -121,7 +121,8 @@ directly to their command line counterparts:
 * ``ignore``
 
 The two settings ``expand`` and ``ignore`` are booleans and must take either
-the value ``True`` or ``False``. All others are strings.
+the value ``true`` or ``false`` (or any semantically reasonable or case
+insensitive equivalent). All others are strings.
 
 Example::
 
