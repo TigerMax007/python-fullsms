@@ -5,7 +5,7 @@ A library and command line interface to the HTTP interface of `fullsms.de
 <http://fullsms.de>`_.
 
 Note: this script makes use of Avery Pennarun's excellent
-```options.py`` <http://apenwarr.ca/log/?m=201111#02>`_.
+` ``options.py`` <http://apenwarr.ca/log/?m=201111#02>`_.
 
 Note: If you do not already have an account on ``fullsms.de``, please consider
 using the following link `https://www.fullsms.de/?ref=101584
