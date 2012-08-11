@@ -168,7 +168,6 @@ Example library usage
 The ``python-fullsms`` can easily be used as a python module::
 
     >>> import fullsms
-
     >>> fullsms.send(user=MaxMusterman,
                      password=maxmustermangeheim,
                      gateway=21,
