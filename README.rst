@@ -132,8 +132,8 @@ Example::
     receiver  = 0123456789
     sender    = 0123456789
     phonebook = ~/.mybook
-    expand    = False
-    ignore    = True
+    expand    = true
+    ignore    = true
 
 Reminder: If you wish to use an alternative file, use the ``[-c | --config]``
 option.
