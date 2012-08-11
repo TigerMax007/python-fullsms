@@ -52,8 +52,8 @@ General program options :
     ``-d, --debug`` :
         Activate debugging. Will output noisly what is being done.
     ``-y, --dry-run`` :
-        Don't perform any REST calls. Useful in combination with ``-y,
-        --dry-run``.
+        Don't perform any REST calls. Useful in combination with ``[-y |
+        --dry-run]``.
     ``-c, --config <config>`` :
         The config file to use (default ``~/.fullsms``). Useful if you have
         multiple configurations.
@@ -74,7 +74,7 @@ For ``send`` only :
 
 Phonebook management :
     ``-b, --phonebook <phonebook>`` :
-        The phonebook file (default ``~/.fullsms- book``). See below for
+        The phonebook file (default: ``~/.fullsms- book``). See below for
         details about this file.
     ``-e, --expand`` :
         Expand sender from the phonebook. This means, that if the sender name
@@ -142,7 +142,7 @@ Example command line usage
 --------------------------
 
 Under the assumption that a correct ``user`` and ``password`` are stored in the
-config file (see below), the two subcommands ``send`` to send a message and
+config file (see above), the two subcommands ``send`` to send a message and
 ``check`` to the check the balance for an account can be used as follows:
 
 Send a text message, specifying the recipient with the ``[-r | --receiver]``
