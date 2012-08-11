@@ -146,7 +146,7 @@ config file (see above), the two subcommands ``send`` to send a message and
 ``check`` to the check the balance for an account can be used as follows:
 
 Send a text message, specifying the recipient with the ``[-r | --receiver]``
-switch::
+option::
 
     $ sms send -r 0123456789 "Hello honey, I'm home"
 
@@ -160,7 +160,7 @@ For all available options, use::
     $ sms -h
 
 Note: if you are using the script from a cron-job you can silence the output
-using ``[-q | --quiet]`` switch.
+using ``[-q | --quiet]`` option.
 
 Example library usage
 ---------------------
@@ -196,7 +196,7 @@ Thus you can use these defined aliases on the command line::
 
     $ sms send -r maxine "Hello honey, I'm home"
 
-Using the ``[-e | --expand]`` command-line switch to expand the sender from the
+Using the ``[-e | --expand]`` command-line option to expand the sender from the
 phonebook too, the following will send a message to ``maxine`` looking like it
 came from ``maximilian``::
 
