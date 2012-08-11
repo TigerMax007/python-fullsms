@@ -50,7 +50,7 @@ General program options :
     ``-q, --quiet`` :
         Silence all output. Useful when executing the script from a cronjob.
     ``-d, --debug`` :
-        Activate debugging. Will output noisly what is being done.
+        Activate debugging. Will output noisily what is being done.
     ``-y, --dry-run`` :
         Don't perform any REST calls. Useful in combination with ``[-y |
         --dry-run]``.
@@ -70,7 +70,7 @@ For ``send`` only :
     ``-r, --receiver <receiver>`` :
         The person to send the message to.
     ``-s, --sender <sender>`` :
-        The sender to use. Can be 11 alphanumeric or 15 numric characters.
+        The sender to use. Can be 11 alphanumeric or 15 numeric characters.
 
 Phonebook management :
     ``-b, --phonebook <phonebook>`` :
