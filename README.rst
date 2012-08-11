@@ -47,7 +47,6 @@ Descriptive options :
         Display version number and exit.
 
 General program options :
-
     ``-q, --quiet`` :
         Silence all output. Useful when executing the script from a cronjob.
     ``-d, --debug`` :
@@ -60,14 +59,12 @@ General program options :
         multiple configurations.
 
 For all subcommands :
-
     ``-u, --user <user>`` :
         The ``fullsms.de`` username.
     ``-p, --password <password>`` :
         The ``fullsms.de`` password.
 
 For ``send`` only :
-
     ``-g, --gateway <gateway>`` :
         The gateway to use (default ``22``). ``fullsms.de`` has multiple
     ``-r, --receiver <receiver>`` :
@@ -76,7 +73,6 @@ For ``send`` only :
         The sender to use. Can be 11 alphanumeric or 15 numric characters.
 
 Phonebook management :
-
     ``-b, --phonebook <phonebook>`` :
         The phonebook file (default ``~/.fullsms- book``). See below for
         details about this file.
