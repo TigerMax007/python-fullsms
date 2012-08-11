@@ -210,7 +210,7 @@ came from ``maximilian``::
     $ sms send -r maxine -e -s maximilian "Any plans for tonight?"
 
 Note however, that setting an arbitrary sender may or may not be supported by
-the gateway.
+the gateway, see the ``fullsms.de`` documentation for details.
 
 Author and Copyright
 --------------------
