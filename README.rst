@@ -154,9 +154,10 @@ config file (see above), the two subcommands ``send`` to send a message and
 ``check`` to the check the balance for an account can be used as follows:
 
 Send a text message, specifying the recipient with the ``[-r | --receiver]``
-option::
+option and the ``[-i | --ignore]`` option (to ensure that the raw phone number
+given on the command line is used)::
 
-    $ sms send -r 0123456789 "Hello honey, I'm home"
+    $ sms send -i -r 0123456789 "Hello honey, I'm home"
 
 Check account balance::
 
