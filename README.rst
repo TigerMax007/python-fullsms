@@ -158,8 +158,8 @@ A rudimentary phonebook file is supported. By default, the script searches
     maximilian = 2345678901
 
 Thus you can use these defined aliases on the command line, see below for
-examples.
-
+examples. If you want to use a different file, use either the ``phonebook``
+option in the config file or the ``[-b | --phonebook]`` command line option.
 
 Example command line usage
 --------------------------
