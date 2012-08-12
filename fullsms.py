@@ -444,17 +444,17 @@ parser = Options(optspec)
 def info(message):
     """ Informational messages. """
     if not QUIET:
-        print "Info:    %s" % message
+        print "Info: \t%s" % message
 
 def warn(message):
     """ Warnings. """
     if not QUIET:
-        print "Warning: %s" % message
+        print "Warn: \t%s" % message
 
 def debug(message):
     """ Debug messages """
     if DEBUG and not QUIET:
-        print "Debug:   %s" % message
+        print "Debug:\t%s" % message
 
 def fatal(message):
     """ Errors related to parsing. """
@@ -462,7 +462,7 @@ def fatal(message):
 
 def error(message):
     """ General program errors. """
-    print "Error:       %s" % message
+    print "Error:\t%s" % message
     sys.exit(2)
 
 class UnknownSettingError(Exception):
