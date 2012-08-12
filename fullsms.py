@@ -444,12 +444,12 @@ parser = Options(optspec)
 def info(message):
     """ Informational messages. """
     if not QUIET:
-        print "Info: \t%s" % message
+        print "Info :\t%s" % message
 
 def warn(message):
     """ Warnings. """
     if not QUIET:
-        print "Warn: \t%s" % message
+        print "Warn :\t%s" % message
 
 def debug(message):
     """ Debug messages """
