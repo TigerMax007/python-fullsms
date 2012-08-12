@@ -157,9 +157,31 @@ A rudimentary phonebook file is supported. By default, the script searches
     maxine = 1234567890
     maximilian = 2345678901
 
-Thus you can use these defined aliases on the command line::
+Thus you can use these defined aliases on the command line, see below for
+examples.
+
+
+Example command line usage
+--------------------------
+
+The following examples make the assumption that a correct ``user`` and
+``password`` are stored in the config file (see above) and that a phonebook
+with appropriate entries has been defined.
+
+In the simplest case, only a receiver and message are required::
 
     $ sms send -r maxine "Hello honey, I'm home"
+
+In this case the phone number of ``maxine`` will be looked up in the phonebook
+and expanded. If no such entry exists, the execution will be aborted in order
+to save you from typos. If you wish to supply the phone number on the command
+line, you need to use the  ``[-i | --ignore]`` option, which will ignore any
+errors caused by numbers not in the phone book::
+
+    $ sms send -i -r 0123456789 "Hello honey, I'm home"
+
+If you wish to make this the default behaviour, set ``ignore`` to ``true`` in
+your config file.
 
 Using the ``[-e | --expand]`` command-line option to expand the sender from the
 phonebook too, the following will send a message to ``maxine`` looking like it
@@ -167,33 +189,20 @@ came from ``maximilian``::
 
     $ sms send -r maxine -e -s maximilian "Any plans for tonight?"
 
-Note however, that setting an arbitrary sender may or may not be supported by
-the gateway, see the ``fullsms.de`` documentation for details.
+Because the sender can be either 11 alphanumeric or 15 numeric characters, you
+need to enable expansion explicitly. Again, If you wish to make this the
+default behaviour, set ``expand`` to ``true`` in your config file.  Lastly,
+note that setting an arbitrary sender may or may not be supported by the
+gateway, see the ``fullsms.de`` documentation for details.
 
-Example command line usage
---------------------------
-
-Under the assumption that a correct ``user`` and ``password`` are stored in the
-config file (see above), the two subcommands ``send`` to send a message and
-``check`` to the check the balance for an account can be used as follows:
-
-Send a text message, specifying the recipient with the ``[-r | --receiver]``
-option and the ``[-i | --ignore]`` option (to ensure that the raw phone number
-given on the command line is used)::
-
-    $ sms send -i -r 0123456789 "Hello honey, I'm home"
-
-Check account balance::
+There is also the ``check`` subcommand to check account balance::
 
     $ sms check
     The current balance for the account 'MaxMusterman' is: 12.571 €
 
-For all available options, use::
+By convetion, a ``[-h | --help]`` option is provided::
 
     $ sms -h
-
-Note: if you are using the script from a cron-job you can silence the output
-using ``[-q | --quiet]`` option.
 
 Example library usage
 ---------------------
