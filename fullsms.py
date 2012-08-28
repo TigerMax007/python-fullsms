@@ -409,7 +409,8 @@ CODES = {
 
 SEND = 'send'
 CHECK = 'check'
-SUBS = [SEND, CHECK]
+PHONEBOOK = 'pb'
+SUBS = [SEND, CHECK, PHONEBOOK]
 def default(str_):
     return "(default '%s')" % str_
 PROG = sys.argv[0]
@@ -424,7 +425,7 @@ q,quiet       silence all output
 d,debug       activate debugging
 y,dry-run     don't perform any REST calls
 c,config=     the config file to use %s
- for all subcommands
+ for 'send' and 'check' subcommands
 u,user=       the fullsms.de username
 p,password=   the fullsms.de password
  for 'send' only
@@ -732,7 +733,15 @@ if __name__ == '__main__':
         if s in API_SETTINGS:
             params[s] = locals()[s]
 
-    if user is None or password is None:
+    if subcommand == PHONEBOOK:
+        try:
+            with open_config(phonebook) as phonebook_fp:
+                contacts = parse_phonebook(phonebook_fp)
+                def printer(str_): print(str_)
+                print_phonebook(contacts, printer)
+        except IOError:
+            debug("No phonebook at: '%s'" % phonebook)
+    elif user is None or password is None:
         fatal('No username and/or password')
     elif subcommand == CHECK:
         debug("Ignoring: '%s' for '%s'" %
