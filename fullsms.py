@@ -553,6 +553,8 @@ def parse_phonebook(phonebook_fp, section='contacts'):
     cp.readfp(phonebook_fp)
     contacts = dict(cp.items(section))
     if DEBUG:
+        debug("Phonebook at '%s' has the following entries:"
+            % phonebook_fp.name)
         print_phonebook(contacts, debug)
     return contacts
 
@@ -565,8 +567,6 @@ def print_phonebook(contacts, print_):
     print_: callable
         something to print with, e.g. debug
     """
-    debug("Phonebook at '%s' has the following entries:"
-        % phonebook_fp.name)
     max_len = max(map(len, contacts.keys())) + 4
     for name, number  in sorted(contacts.items()):
         print_('%s : %s' % (name.ljust(max_len), number))
