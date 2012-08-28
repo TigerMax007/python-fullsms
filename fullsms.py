@@ -552,12 +552,23 @@ def parse_phonebook(phonebook_fp, section='contacts'):
     cp.readfp(phonebook_fp)
     contacts = dict(cp.items(section))
     if DEBUG:
-        max_len = max(map(len, contacts.keys())) + 4
-        debug("Phonebook at '%s' has the following entries:"
-                % phonebook_fp.name)
-        for name, number  in sorted(contacts.items()):
-            debug('%s : %s' % (name.ljust(max_len), number))
+        print_phonebook(contacts, debug)
     return contacts
+
+def print_phonebook(contacts, print_):
+    """ Print the phonebook contacts
+    Parameters
+    ----------
+    contacts: dict
+        the contacts, name -> number
+    print_: callable
+        something to print with, e.g. debug
+    """
+    debug("Phonebook at '%s' has the following entries:"
+        % phonebook_fp.name)
+    max_len = max(map(len, contacts.keys())) + 4
+    for name, number  in sorted(contacts.items()):
+        print_('%s : %s' % (name.ljust(max_len), number))
 
 def assemble_rest_call(function, parameters):
     """ Create a URL suitable for making a REST call to fullsms.de
