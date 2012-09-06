@@ -820,7 +820,7 @@ if __name__ == '__main__':
         # check result instead
         result = int(result)
         if result == 200:
-            info('Send successful!')
+            info('Send successful! (%d chars)' % mess_len)
         else:
             error('Failed sending, error code: %d - %s'
                     % (result, CODES[result]))
