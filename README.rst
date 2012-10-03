@@ -221,6 +221,13 @@ The ``python-fullsms`` can easily be used as a python module::
     >>> fullsms.check(user=MaxMusterman, password=maxmustermangeheim)
     (200, '12.571'
 
+TODO
+----
+
+* Better format for the option list
+* Pipe from stdin
+* Switch so the check command returns only the value
+
 Author and Copyright
 --------------------
 
