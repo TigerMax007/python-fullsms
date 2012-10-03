@@ -198,7 +198,7 @@ gateway, see the ``fullsms.de`` documentation for details.
 There is also the ``check`` subcommand to check account balance::
 
     $ sms check
-    The current balance for the account 'MaxMusterman' is: 12.571 €
+    The current balance for the account 'MaxMusterman' is: 12,571 €
 
 By convetion, a ``[-h | --help]`` option is provided::
 
@@ -219,7 +219,7 @@ The ``python-fullsms`` can easily be used as a python module::
     (200 : 'OK')
 
     >>> fullsms.check(user=MaxMusterman, password=maxmustermangeheim)
-    (200, '12.571'
+    (200, '12,571'
 
 TODO
 ----
