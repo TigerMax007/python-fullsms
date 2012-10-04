@@ -410,8 +410,8 @@ CODES = {
 
 SEND = 'send'
 CHECK = 'check'
-PHONEBOOK = 'pb'
-SUBS = [SEND, CHECK, PHONEBOOK]
+PB = 'pb'
+SUBS = [SEND, CHECK, PB]
 def default(str_):
     return "(default '%s')" % str_
 PROG = sys.argv[0]
@@ -736,7 +736,7 @@ if __name__ == '__main__':
         if s in API_SETTINGS:
             params[s] = locals()[s]
 
-    if subcommand == PHONEBOOK:
+    if subcommand == PB:
         try:
             with open_config(phonebook) as phonebook_fp:
                 contacts = parse_phonebook(phonebook_fp)
