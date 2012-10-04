@@ -76,6 +76,10 @@ For ``send`` and ``check`` subcommands :
     ``-p, --password <password>`` :
         The ``fullsms.de`` password.
 
+For ``check`` only:
+    ``-a, --amount`` :
+        Output only the amount, no fluff.
+
 For ``send`` only :
     ``-g, --gateway <gateway>`` :
         The gateway to use (default ``22``). ``fullsms.de`` has multiple
@@ -99,11 +103,11 @@ Phonebook management :
         disables this behaviour. If you wish to disable this b default,
         consider using the config file.
 
-Note: since ``[-e | --expand]`` and ``[-i | --ignore]`` can also be specified
-in the config file, you may need a way to revert these if they are set to
-``true``. Courtesy of ``options.py`` we have the negation options
-``--no-expand`` and ``--no-ignore`` at no additional cost which will do exactly
-that.
+Note: since ``[-e | --expand]``, ``[-i | --ignore]`` and ``[-a | --amount]``
+can also be specified in the config file, you may need a way to revert these if
+they are set to ``true``. Courtesy of ``options.py`` we have the negation
+options ``--no-expand``, ``--no-ignore`` and ``--no-amount`` at no additional
+cost which will do exactly that.
 
 Config file
 -----------
@@ -130,10 +134,11 @@ directly to their command line counterparts:
 * ``phonebook``
 * ``expand``
 * ``ignore``
+* ``amount``
 
-The two settings ``expand`` and ``ignore`` are booleans and must take either
-the value ``true`` or ``false`` (or any semantically reasonable or case
-insensitive equivalent). All others are strings.
+The three settings ``expand``, ``ignore`` and ``amount`` are booleans and must
+take either the value ``true`` or ``false`` (or any semantically reasonable or
+case insensitive equivalent). All others are strings.
 
 Example::
 
@@ -215,7 +220,13 @@ There is also the ``check`` subcommand to check account balance::
     $ sms check
     The current balance for the account 'MaxMusterman' is: 12,571 €
 
-And finally a ``pb`` subcommand to print the phone-book::
+If you want only the amount, use the ``[-a | --amount]`` switch or the
+corresponding config file setting::
+
+    $ sms check -a
+    12,571
+
+And finally, a ``pb`` subcommand to print the phone-book::
 
     $ sms pb
     max           : 0123456789
@@ -247,7 +258,6 @@ TODO
 ----
 
 * Better format for the option list
-* Switch so the check command returns only the value
 * Use BeautifulSoup to get the recent messages
 
 Changelog
