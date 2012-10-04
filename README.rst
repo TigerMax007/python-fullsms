@@ -229,6 +229,22 @@ TODO
 * Switch so the check command returns only the value
 * Use BeautifulSoup to get the recent messages
 
+Changelog
+---------
+
+* v0.2.0 - XXXX-XX-XX
+
+  * 'pb' subcommand to print the sorted phonebook
+  * Fix a bug caused by change in upstream API
+    (credit remaining uses ',' now instead of '.')
+  * Print the number of chars used when sending
+
+* v0.1.0 - 2012-08-20
+
+  * Initial release
+  * 'check' and 'send' subcommands
+  * Phone book
+
 Author and Copyright
 --------------------
 
