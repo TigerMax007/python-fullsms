@@ -26,7 +26,7 @@ interface and the available gateways.
 Synposis
 --------
 
-There are three subcommands ``pb`` to print the phone-book, ``check`` to check
+There are three subcommands ``pb`` to print the phonebook, ``check`` to check
 the account balance and ``send`` to send sms::
 
     $ sms [GENERAL-OPTIONS] < check | send | pb > [SPECIFIC-OPTIONS]
@@ -226,7 +226,7 @@ corresponding config file setting::
     $ sms check -a
     12,571
 
-And finally, a ``pb`` subcommand to print the phone-book::
+And finally, a ``pb`` subcommand to print the phonebook::
 
     $ sms pb
     max           : 0123456789
