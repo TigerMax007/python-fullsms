@@ -26,9 +26,10 @@ interface and the available gateways.
 Synposis
 --------
 
-There are two subcommands ``check`` and ``send``::
+There are three subcommands ``pb`` to print the phone-book, ``check`` to check
+the account balance and ``send`` to send sms::
 
-    $ sms [GENERAL-OPTIONS] < check | send > [SPECIFIC-OPTIONS]
+    $ sms [GENERAL-OPTIONS] < check | send | pb > [SPECIFIC-OPTIONS]
 
 The specific invocations are::
 
@@ -41,11 +42,12 @@ The specific invocations are::
           [ -g <gateway> ] [ -r <receiver> ] [ -s <sender> ]
           [ -p <phonebook> ] [ -e ] [ -i ]
           <message>
+    $ sms [ -q | -d ] [ -y ] [ -c <config> ] pb
 
 Because of the way ``options.py`` works, the general program options and
 subcommand options can be mixed and can be placed before or after the
 subcommand itself. Also, options which are relevant only for ``send`` can be
-given when using ``check`` and will be silently ignored.
+given when using ``check`` or ``pb`` and will be silently ignored.
 
 Command Line Options
 --------------------
@@ -68,7 +70,7 @@ General program options :
         The config file to use (default ``~/.fullsms``). Useful if you have
         multiple configurations.
 
-For all subcommands :
+For ``send`` and ``check`` subcommands :
     ``-u, --user <user>`` :
         The ``fullsms.de`` username.
     ``-p, --password <password>`` :
@@ -201,6 +203,13 @@ There is also the ``check`` subcommand to check account balance::
 
     $ sms check
     The current balance for the account 'MaxMusterman' is: 12,571 €
+
+And finally a ``pb`` subcommand to print the phone-book::
+
+    $ sms pb
+    max           : 0123456789
+    maximilian    : 2345678901
+    maxine        : 1234567890
 
 By convetion, a ``[-h | --help]`` option is provided::
 
