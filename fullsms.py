@@ -767,7 +767,11 @@ if __name__ == '__main__':
             fatal(ve)
 
         # prepare the message and check its validity
-        mess = ' '.join(extra[1:])
+        if len(extra) == 1:
+            debug('Reading from stdin...')
+            mess = sys.stdin.read().strip()
+        else:
+            mess = ' '.join(extra[1:])
         mess_len = len(mess)
         debug("Message: '%s', length: '%d'" % (mess, mess_len))
         if mess_len == 0:

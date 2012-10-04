@@ -41,7 +41,7 @@ The specific invocations are::
           [ -u <user> ] [ -p <password> ]
           [ -g <gateway> ] [ -r <receiver> ] [ -s <sender> ]
           [ -p <phonebook> ] [ -e ] [ -i ]
-          <message>
+          [ <message> ]
     $ sms [ -q | -d ] [ -y ] [ -c <config> ] pb
 
 Because of the way ``options.py`` works, the general program options and
@@ -198,6 +198,17 @@ need to enable expansion explicitly. Again, If you wish to make this the
 default behaviour, set ``expand`` to ``true`` in your config file.  Lastly,
 note that setting an arbitrary sender may or may not be supported by the
 gateway, see the ``fullsms.de`` documentation for details.
+
+The ``<message>`` is optional, since the ``send`` subcommand also accepts input
+on ``stdin``, for example by using a UNIX pipe::
+
+    $ echo "Any plans for tonight?" | sms send -r maxine
+
+Or, if you don't supply something, the script will wait for input, which you
+can terminate by sending ``EOF`` (``ctrl+d``)::
+
+    $ sms send -r maxine
+    Any plans for tonight? <ctrl+d>
 
 There is also the ``check`` subcommand to check account balance::
 
