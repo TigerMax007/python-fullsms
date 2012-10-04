@@ -1,6 +1,8 @@
 Description
 ===========
 
+Send sms from the command line.
+
 A library and command line interface to the HTTP interface of `fullsms.de
 <http://fullsms.de>`_.
 
