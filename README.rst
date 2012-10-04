@@ -86,7 +86,7 @@ For ``send`` only :
 
 Phonebook management :
     ``-b, --phonebook <phonebook>`` :
-        The phonebook file (default: ``~/.fullsms- book``). See below for
+        The phonebook file (default: ``~/.fullsms-book``). See below for
         details about this file.
     ``-e, --expand`` :
         Expand sender from the phonebook. This means, that if the sender name
