@@ -270,6 +270,7 @@ Changelog
     (credit remaining uses ',' now instead of '.')
   * Print the number of chars used when sending
   * Accept messages on stdin
+  * Option to output only the amount when using 'check'
 
 * v0.1.0 - 2012-08-20
 
