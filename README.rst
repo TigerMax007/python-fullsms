@@ -260,6 +260,7 @@ Changelog
   * Fix a bug caused by change in upstream API
     (credit remaining uses ',' now instead of '.')
   * Print the number of chars used when sending
+  * Accept messages on stdin
 
 * v0.1.0 - 2012-08-20
 
