@@ -90,4 +90,3 @@ def test_parse_phonebook():
                 'maxine': '1234567890',
                 'maximilian': '2345678901'}
     nt.assert_equal(contacts, expected)
-
