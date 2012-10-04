@@ -338,8 +338,9 @@ CHECK_SETTINGS = [USER, PASSWORD]
 PHONEBOOK = 'phonebook'
 EXPAND    = 'expand'
 IGNORE    = 'ignore'
-SETTINGS = API_SETTINGS + [PHONEBOOK, EXPAND, IGNORE]
-BOOLEAN_SETTINGS = [EXPAND, IGNORE]
+AMOUNT    = 'amount'
+SETTINGS = API_SETTINGS + [PHONEBOOK, EXPAND, IGNORE, AMOUNT]
+BOOLEAN_SETTINGS = [EXPAND, IGNORE, AMOUNT]
 
 class Gateway(object):
     """ Simple object to store gateway attributes.
@@ -428,6 +429,8 @@ c,config=     the config file to use %s
  for 'send' and 'check' subcommands
 u,user=       the fullsms.de username
 p,password=   the fullsms.de password
+ for 'check' only
+a,amount      output only the balance
  for 'send' only
 g,gateway=    the gateway to use %s
 r,receiver=   the person to send the message to
@@ -753,8 +756,11 @@ if __name__ == '__main__':
         # under the assumption, that result contains a '.' if its a valid
         # balance
         if ',' in result:
-            info("The current balance for the account '%s' is: %s €" \
-            % (user, result))
+            if amount:
+                print("%s" % result)
+            else:
+                info("The current balance for the account '%s' is: %s €" \
+                % (user, result))
         else:
             result = int(result)
             error("Failed checking, error code: %d - %s"
