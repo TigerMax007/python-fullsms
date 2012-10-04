@@ -64,8 +64,8 @@ General program options :
     ``-d, --debug`` :
         Activate debugging. Will output noisily what is being done.
     ``-y, --dry-run`` :
-        Don't perform any REST calls. Useful in combination with ``[-y |
-        --dry-run]``.
+        Don't perform any REST calls. Useful in combination with ``[-d |
+        --debug]``.
     ``-c, --config <config>`` :
         The config file to use (default ``~/.fullsms``). Useful if you have
         multiple configurations.
