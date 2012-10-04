@@ -247,7 +247,6 @@ TODO
 ----
 
 * Better format for the option list
-* Pipe from stdin
 * Switch so the check command returns only the value
 * Use BeautifulSoup to get the recent messages
 
