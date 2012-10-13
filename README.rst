@@ -87,10 +87,9 @@ Command Line Options
 --------------------
 
 Descriptive options :
-    ``-h, --help`` :
-        Display help and exit.
-    ``-v, --version`` :
-        Display version number and exit.
+
+-h, --help        Display help and exit
+-v, --version     Display version number and exit.
 
 General program options :
     ``-q, --quiet`` :
