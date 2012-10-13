@@ -29,7 +29,8 @@ Quickstart
 If you just want to get started ASAP, follow the instructions below. If you run
 into trouble contact the author by email or via irc (``esc`` on ``freenode``).
 
-* Make an account on `fullsms.de <https://www.fullsms.de/?ref=101584>`_
+* Make an account on `fullsms.de <https://www.fullsms.de/?ref=101584>`_ <-- use
+  this link please.
 * Obtain the script
 
   * Either clone the git repository with ``git clone git://github.com/esc/python-fullsms.git``
@@ -47,8 +48,14 @@ into trouble contact the author by email or via irc (``esc`` on ``freenode``).
   sms appear to come from.
 * Activate the `HTTP-Interface <https://www.fullsms.de/frontend.html?do=schnittstelle_sms_http>`_
   and configure IPs if you want.
-* Start sending sms, you have 0,50 € to try it out. If you like the service,
-  buy some credits and continue to enjoy sending sms from the command line.
+* Start sending sms::
+
+    $ ./sms send -r 004901234567 "I really enjoy sending sms from the command line"
+
+  you have 0,50 € to try it out. If you like the service, buy some credits and
+  continue to enjoy sending sms from the command line.
+* Read the rest of this documentation to learn more about option for sending
+  and managing your phone-book.
 
 
 Synposis
