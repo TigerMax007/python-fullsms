@@ -14,15 +14,6 @@ using the following link `https://www.fullsms.de/?ref=101584
 <https://www.fullsms.de/?ref=101584>`_ to register. This will credit the
 account of the author of ``python-fullsms`` with ``15,00 €``.
 
-``fullsms.de`` Documentation
-----------------------------
-
-There are two PDFs provided by ``fullsms.de`` which describe both the HTTP
-interface and the available gateways.
-
-* `Description of the HTTP interface <https://www.fullsms.de/dokumente/fullsms-SMS-Versand.pdf>`_
-* `Description of the available gateways <https://www.fullsms.de/dokumente/fullsms-SMS-Gateway-Beschreibung.pdf>`_
-
 Quickstart
 ----------
 
@@ -57,6 +48,14 @@ into trouble contact the author by email or via irc (``esc`` on ``freenode``).
 * Read the rest of this documentation to learn more about option for sending
   and managing your phone-book.
 
+``fullsms.de`` Documentation
+----------------------------
+
+There are two PDFs provided by ``fullsms.de`` which describe both the HTTP
+interface and the available gateways.
+
+* `Description of the HTTP interface <https://www.fullsms.de/dokumente/fullsms-SMS-Versand.pdf>`_
+* `Description of the available gateways <https://www.fullsms.de/dokumente/fullsms-SMS-Gateway-Beschreibung.pdf>`_
 
 Synposis
 --------
