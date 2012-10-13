@@ -291,7 +291,6 @@ The ``python-fullsms`` can easily be used as a python module::
 TODO
 ----
 
-* Better format for the option list
 * Use BeautifulSoup to get the recent messages
 
 Changelog
