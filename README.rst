@@ -87,55 +87,55 @@ Command Line Options
 --------------------
 
 Descriptive options :
-    ``-h, --help`` :
-        Display help and exit.
-    ``-v, --version`` :
-        Display version number and exit.
+
+-h, --help        Display help and exit
+-v, --version     Display version number and exit.
 
 General program options :
-    ``-q, --quiet`` :
-        Silence all output. Useful when executing the script from a cronjob.
-    ``-d, --debug`` :
-        Activate debugging. Will output noisily what is being done.
-    ``-y, --dry-run`` :
-        Don't perform any REST calls. Useful in combination with ``[-d |
-        --debug]``.
-    ``-c, --config <config>`` :
-        The config file to use (default ``~/.fullsms``). Useful if you have
-        multiple configurations.
+
+-q, --quiet    Silence all output. Useful when executing the script
+               from a cronjob.
+-d, --debug    Activate debugging. Will output noisily what is being
+               done.
+-y, --dry-run  Don't perform any REST calls. Useful in combination
+               with ``[-d | --debug]``.
+-c, --config <config>
+               The config file to use (default ``~/.fullsms``). Useful if you have multiple configurations.
 
 For ``send`` and ``check`` subcommands :
-    ``-u, --user <user>`` :
-        The ``fullsms.de`` username.
-    ``-p, --password <password>`` :
-        The ``fullsms.de`` password.
+
+-u, --user <user>          The ``fullsms.de`` username.
+-p, --password <password>  The ``fullsms.de`` password.
 
 For ``check`` only:
-    ``-a, --amount`` :
-        Output only the amount, no fluff.
+
+-a, --amount      Output only the amount, no fluff.
 
 For ``send`` only :
-    ``-g, --gateway <gateway>`` :
-        The gateway to use (default ``22``). ``fullsms.de`` has multiple
-    ``-r, --receiver <receiver>`` :
-        The person to send the message to.
-    ``-s, --sender <sender>`` :
-        The sender to use. Can be 11 alphanumeric or 15 numeric characters.
+
+-g, --gateway <gateway>    The gateway to use (default ``22``). ``fullsms.de``
+                           has multiple ones available
+
+-r, --receiver <receiver>  The person to send the message to.
+-s, --sender <sender>      The sender to use. Can be 11 alphanumeric or 15
+                           numeric characters.
 
 Phonebook management :
-    ``-b, --phonebook <phonebook>`` :
-        The phonebook file (default: ``~/.fullsms-book``). See below for
-        details about this file.
-    ``-e, --expand`` :
-        Expand sender from the phonebook. This means, that if the sender name
-        is found in the phonebook, the corresponding number will be used as a
-        sender.
-    ``-i, --ignore`` :
-        Ignore errors when expanding receiver. The most common use case is to
-        send messages to people in your phonebook. To avoid typos, the script
-        will abort if the given receiver is not in your phone book. This option
-        disables this behaviour. If you wish to disable this b default,
-        consider using the config file.
+
+-b, --phonebook <phonebook>  The phonebook file (default: ``~/.fullsms-book``).
+                             See below for details about this file.
+
+-e, --expand                 Expand sender from the phonebook. This means, that
+                             if the sender name is found in the phonebook, the
+                             corresponding number will be used as a sender.
+
+-i, --ignore                 Ignore errors when expanding receiver. The most
+                             common use case is to send messages to people in
+                             your phonebook. To avoid typos, the script will
+                             abort if the given receiver is not in your phone
+                             book. This option disables this behaviour. If you
+                             wish to disable this default, consider using the
+                             config file.
 
 Note: since ``[-e | --expand]``, ``[-i | --ignore]`` and ``[-a | --amount]``
 can also be specified in the config file, you may need a way to revert these if
