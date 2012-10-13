@@ -143,7 +143,7 @@ they are set to ``true``. Courtesy of ``options.py`` we have the negation
 options ``--no-expand``, ``--no-ignore`` and ``--no-amount`` at no additional
 cost which will do exactly that.
 
-Config file
+Config File
 -----------
 
 ``python-fullsms`` can be configured using a config file, usually located at
@@ -204,7 +204,7 @@ Thus you can use these defined aliases on the command line, see below for
 examples. If you want to use a different file, use either the ``phonebook``
 option in the config file or the ``[-b | --phonebook]`` command line option.
 
-Example command line usage
+Example Command Line Usage
 --------------------------
 
 The following examples make the assumption that a correct ``user`` and
@@ -271,7 +271,7 @@ By convetion, a ``[-h | --help]`` option is provided::
 
     $ sms -h
 
-Example library usage
+Example Library Usage
 ---------------------
 
 The ``python-fullsms`` can easily be used as a python module::
