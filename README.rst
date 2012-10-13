@@ -35,16 +35,16 @@ into trouble contact the author by email or via irc (``esc`` on ``freenode``).
     sender    = 0049123456789
 
   Substituting the values ``user`` and ``password`` with your ``fullsms.de``
-  crednetials, and ``sender`` with the phone number you would like to have the
-  sms appear to come from.
+  credentials, and ``sender`` with the phone number you would like to have the
+  SMS appear to come from.
 * Activate the `HTTP-Interface <https://www.fullsms.de/frontend.html?do=schnittstelle_sms_http>`_
   and configure IPs if you want.
-* Start sending sms::
+* Start sending SMS::
 
     $ ./sms send -r 004901234567 "I really enjoy sending sms from the command line"
 
-  you have 0,50 € to try it out. If you like the service, buy some credits and
-  continue to enjoy sending sms from the command line.
+  ...you have 0,50 € to try it out. If you like the service, buy some credits
+  and continue to enjoy sending SMS from the command line.
 * Read the rest of this documentation to learn more about option for sending
   and managing your phone-book.
 
