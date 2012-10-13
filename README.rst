@@ -305,6 +305,7 @@ Changelog
   * Print the number of chars used when sending
   * Accept messages on stdin
   * Option to output only the amount when using 'check'
+  * Added a quickstart for busy people
 
 * v0.1.0 - 2012-08-20
 
