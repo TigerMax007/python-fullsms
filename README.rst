@@ -23,6 +23,37 @@ interface and the available gateways.
 * `Description of the HTTP interface <https://www.fullsms.de/dokumente/fullsms-SMS-Versand.pdf>`_
 * `Description of the available gateways <https://www.fullsms.de/dokumente/fullsms-SMS-Gateway-Beschreibung.pdf>`_
 
+Quickstart
+----------
+
+If you just want to get started ASAP, follow the instructions below. If you run
+into trouble contact the author by email or via irc (``esc`` on ``freenode``).
+
+* Make an account on `fullsms.de <https://www.fullsms.de/?ref=101584>`_
+
+* Obtain the script
+
+    * Either clone the git repository with ``git clone git://github.com/esc/python-fullsms.git``
+    * Or do ``wget https://raw.github.com/esc/python-fullsms/master/fullsms.py`` and then ``cp fullsms.py sms && chmod +x sms``
+
+* Create a file ``.fullsms`` in your ``$HOME`` directory which looks like::
+
+    [settings]
+    user      = MaxMusterman
+    password  = maxmustermangeheim
+    sender    = 0049123456789
+
+  Substituting the values ``user`` and ``password`` with your ``fullsms.de``
+  crednetials, and ``sender`` with the phone number you would like to have the
+  sms appear to come from.
+
+* Activate the `HTTP-Interface <https://www.fullsms.de/frontend.html?do=schnittstelle_sms_http>`_
+  and configure IPs if you want.
+
+* Start sending sms, you have 0,50 € to try it out. If you like the service,
+  buy some credits and continue to enjoy sending sms from the command line.
+
+
 Synposis
 --------
 
