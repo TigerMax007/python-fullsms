@@ -33,8 +33,8 @@ into trouble contact the author by email or via irc (``esc`` on ``freenode``).
 
 * Obtain the script
 
-    * Either clone the git repository with ``git clone git://github.com/esc/python-fullsms.git``
-    * Or do ``wget https://raw.github.com/esc/python-fullsms/master/fullsms.py`` and then ``cp fullsms.py sms && chmod +x sms``
+  * Either clone the git repository with ``git clone git://github.com/esc/python-fullsms.git``
+  * Or do ``wget https://raw.github.com/esc/python-fullsms/master/fullsms.py`` and then ``cp fullsms.py sms && chmod +x sms``
 
 * Create a file ``.fullsms`` in your ``$HOME`` directory which looks like::
 
