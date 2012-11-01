@@ -329,7 +329,7 @@ The ``python-fullsms`` can easily be used as a python module:
     (200 : 'OK')
 
     >>> fullsms.check(user=MaxMusterman, password=maxmustermangeheim)
-    (200, '12,571'
+    (200, '12,571')
 
 TODO
 ----
