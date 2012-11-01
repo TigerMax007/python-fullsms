@@ -341,7 +341,7 @@ TODO
 Changelog
 ---------
 
-* v0.2.0 - XXXX-XX-XX
+* v0.2.0 - 2012-11-01
 
   * 'pb' subcommand to print the sorted phonebook
   * Fix a bug caused by change in upstream API
