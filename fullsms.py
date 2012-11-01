@@ -414,7 +414,7 @@ PB = 'pb'
 SUBS = [SEND, CHECK, PB]
 def default(str_):
     return "(default '%s')" % str_
-PROG = sys.argv[0]
+PROG = os.path.basename(sys.argv[0])
 optspec = """
 %s [GENERAL-OPTIONS] %s [SPECIFIC-OPTIONS] <message...>
 --
