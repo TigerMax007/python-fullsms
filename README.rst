@@ -335,6 +335,8 @@ TODO
 ----
 
 * Use BeautifulSoup to get the recent messages
+* setup.py
+* upload to PyPi
 
 Changelog
 ---------
