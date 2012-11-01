@@ -24,26 +24,41 @@ into trouble contact the author by email or via irc (``esc`` on ``freenode``).
   this link please.
 * Obtain the script
 
-  * Either clone the git repository with ``git clone git://github.com/esc/python-fullsms.git``
-  * Or do ``wget https://raw.github.com/esc/python-fullsms/master/fullsms.py`` and then ``cp fullsms.py sms && chmod +x sms``
+  * Either clone the git repository with:
 
-* Create a file ``.fullsms`` in your ``$HOME`` directory which looks like::
+    .. code:: shell
 
-    [settings]
-    user      = MaxMusterman
-    password  = maxmustermangeheim
-    sender    = 0049123456789
+        $ git clone git://github.com/esc/python-fullsms.git
 
-  Substituting the values ``user`` and ``password`` with your ``fullsms.de``
+  * Or do:
+
+    .. code:: shell
+
+        $ wget https://raw.github.com/esc/python-fullsms/master/fullsms.py
+        $ cp fullsms.py sms && chmod +x sms
+
+* Create a file ``.fullsms`` in your ``$HOME`` directory which looks like:
+
+  .. code:: ini
+
+      [settings]
+      user      = MaxMusterman
+      password  = maxmustermangeheim
+      sender    = 0049123456789
+
+  and substitute the values ``user`` and ``password`` with your ``fullsms.de``
   credentials, and ``sender`` with the phone number you would like to have the
   SMS appear to come from.
+
 * Activate the `HTTP-Interface <https://www.fullsms.de/frontend.html?do=schnittstelle_sms_http>`_
   and configure IPs if you want.
-* Start sending SMS::
+* Start sending SMS:
 
-    $ ./sms send -r 004901234567 "I really enjoy sending sms from the command line"
+  .. code:: shell
 
-  ...you have 0,50 € to try it out. If you like the service, buy some credits
+      $ ./sms send -r 004901234567 "I really enjoy sending sms from the command line"
+
+  ... you have 0,50 € to try it out. If you like the service, buy some credits
   and continue to enjoy sending SMS from the command line.
 * Read the rest of this documentation to learn more about option for sending
   and managing your phone-book.
@@ -61,11 +76,15 @@ Synposis
 --------
 
 There are three subcommands ``pb`` to print the phonebook, ``check`` to check
-the account balance and ``send`` to send sms::
+the account balance and ``send`` to send sms:
+
+.. code:: shell
 
     $ sms [GENERAL-OPTIONS] < check | send | pb > [SPECIFIC-OPTIONS]
 
-The specific invocations are::
+The specific invocations are:
+
+.. code:: shell
 
     $ sms -h
     $ sms -v
@@ -174,7 +193,9 @@ The three settings ``expand``, ``ignore`` and ``amount`` are booleans and must
 take either the value ``true`` or ``false`` (or any semantically reasonable or
 case insensitive equivalent). All others are strings.
 
-Example::
+Example:
+
+.. code:: ini
 
     [settings]
     user      = MaxMusterman
@@ -193,7 +214,9 @@ Phonebook
 ---------
 
 A rudimentary phonebook file is supported. By default, the script searches
-``~/.fullsms-book`` for entries in a section titled ``contacts``::
+``~/.fullsms-book`` for entries in a section titled ``contacts``:
+
+.. code:: ini
 
     [contacts]
     max = 0123456789
@@ -211,7 +234,9 @@ The following examples make the assumption that a correct ``user`` and
 ``password`` are stored in the config file (see above) and that a phonebook
 with appropriate entries has been defined.
 
-In the simplest case, only a receiver and message are required::
+In the simplest case, only a receiver and message are required:
+
+.. code:: shell
 
     $ sms send -r maxine "Hello honey, I'm home"
 
@@ -219,7 +244,9 @@ In this case the phone number of ``maxine`` will be looked up in the phonebook
 and expanded. If no such entry exists, the execution will be aborted in order
 to save you from typos. If you wish to supply the phone number on the command
 line, you need to use the  ``[-i | --ignore]`` option, which will ignore any
-errors caused by numbers not in the phone book::
+errors caused by numbers not in the phone book:
+
+.. code:: shell
 
     $ sms send -i -r 0123456789 "Hello honey, I'm home"
 
@@ -228,7 +255,9 @@ your config file.
 
 Using the ``[-e | --expand]`` command-line option to expand the sender from the
 phonebook too, the following will send a message to ``maxine`` looking like it
-came from ``maximilian``::
+came from ``maximilian``:
+
+.. code:: shell
 
     $ sms send -r maxine -e -s maximilian "Any plans for tonight?"
 
@@ -239,42 +268,56 @@ note that setting an arbitrary sender may or may not be supported by the
 gateway, see the ``fullsms.de`` documentation for details.
 
 The ``<message>`` is optional, since the ``send`` subcommand also accepts input
-on ``stdin``, for example by using a UNIX pipe::
+on ``stdin``, for example by using a UNIX pipe:
+
+.. code:: shell
 
     $ echo "Any plans for tonight?" | sms send -r maxine
 
 Or, if you don't supply something, the script will wait for input, which you
-can terminate by sending ``EOF`` (``ctrl+d``)::
+can terminate by sending ``EOF`` (``ctrl+d``):
+
+.. code:: shell
 
     $ sms send -r maxine
     Any plans for tonight? <ctrl+d>
 
-There is also the ``check`` subcommand to check account balance::
+There is also the ``check`` subcommand to check account balance:
+
+.. code:: shell
 
     $ sms check
     The current balance for the account 'MaxMusterman' is: 12,571 €
 
 If you want only the amount, use the ``[-a | --amount]`` switch or the
-corresponding config file setting::
+corresponding config file setting:
+
+.. code:: shell
 
     $ sms check -a
     12,571
 
-And finally, a ``pb`` subcommand to print the phonebook::
+And finally, a ``pb`` subcommand to print the phonebook:
+
+.. code:: shell
 
     $ sms pb
     max           : 0123456789
     maximilian    : 2345678901
     maxine        : 1234567890
 
-By convetion, a ``[-h | --help]`` option is provided::
+By convetion, a ``[-h | --help]`` option is provided:
+
+.. code:: shell
 
     $ sms -h
 
 Example Library Usage
 ---------------------
 
-The ``python-fullsms`` can easily be used as a python module::
+The ``python-fullsms`` can easily be used as a python module:
+
+.. code:: python
 
     >>> import fullsms
     >>> fullsms.send(user=MaxMusterman,
