@@ -320,7 +320,7 @@ class Options:
 # options.py which was copied verbatim from bup ends here                     #
 ###############################################################################
 
-__version__ = '0.2.0-dev'
+__version__ = '0.2.0'
 __author__  = 'Valentin Haenel'
 
 BASE_URL = "https://www.fullsms.de/gw/"
