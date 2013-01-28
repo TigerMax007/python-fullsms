@@ -342,6 +342,7 @@ AMOUNT    = 'amount'
 SETTINGS = API_SETTINGS + [PHONEBOOK, EXPAND, IGNORE, AMOUNT]
 BOOLEAN_SETTINGS = [EXPAND, IGNORE, AMOUNT]
 
+
 class Gateway(object):
     """ Simple object to store gateway attributes.
 
@@ -356,18 +357,19 @@ class Gateway(object):
     """
     def __init__(self, id_, limit, own):
         self.id_, self.limit, self.own = id_, limit, own
+
     def __str__(self):
         return str(self.id_)
 
 GATEWAYS = dict((str(g[0]), Gateway(*g)) for g in
-        [(11, 1560, True ),
-         (26,  800, False),
-         (31,  160, False),
-         (12, 1560, True ),
-         (22,  800, True ),
-         (27,  800, False),
-         (32,  160, False),
-        ])
+                [(11, 1560, True),
+                 (26,  800, False),
+                 (31,  160, False),
+                 (12, 1560, True),
+                 (22,  800, True),
+                 (27,  800, False),
+                 (32,  160, False),
+                 ])
 
 DEFAULTS = dict((zip(SETTINGS, [None] * len(SETTINGS))))
 DEFAULTS[GATEWAY] = GATEWAYS[str(22)]
@@ -383,37 +385,38 @@ DRY_RUN = False
 DRY_RUN_CODE = 666
 
 CODES = {
-    200 : 'OK',
-    301 : "Syntaxerror: user missing",
-    302 : "Syntaxerror: password missing",
-    303 : "Syntaxerror: receiver missing",
-    304 : "Syntaxerror: gateway missing",
-    305 : "Syntaxerror: text missing",
-    401 : "Unauthorized (username or password wrong)",
-    404 : "Error when sening SMS",
-    405 : "User not enabled for HTTP",
-    406 : "IP not enabled for HTTP",
-    407 : "Massbroadcast not available for this gateway",
-    408 : "Massbroadcast not available for this gateway",
-    500 : "Unknowen server error, please contact <support@fullsms.de.de>",
-    501 : "SMS Text empty",
-    502 : "SMS Text too long",
-    504 : "Wrong SMS type",
-    505 : "Sender too long",
-    506 : "Cellphone number invalid",
-    507 : "Not enough credits",
-    508 : "SMS type requires a sender",
-    509 : "SMS type does not allow for a sender",
+    200: 'OK',
+    301: "Syntaxerror: user missing",
+    302: "Syntaxerror: password missing",
+    303: "Syntaxerror: receiver missing",
+    304: "Syntaxerror: gateway missing",
+    305: "Syntaxerror: text missing",
+    401: "Unauthorized (username or password wrong)",
+    404: "Error when sening SMS",
+    405: "User not enabled for HTTP",
+    406: "IP not enabled for HTTP",
+    407: "Massbroadcast not available for this gateway",
+    408: "Massbroadcast not available for this gateway",
+    500: "Unknowen server error, please contact <support@fullsms.de.de>",
+    501: "SMS Text empty",
+    502: "SMS Text too long",
+    504: "Wrong SMS type",
+    505: "Sender too long",
+    506: "Cellphone number invalid",
+    507: "Not enough credits",
+    508: "SMS type requires a sender",
+    509: "SMS type does not allow for a sender",
     # special option for python-fullsms only
-    DRY_RUN_CODE : "No REST call made, probably using '--dry-run'"
-        }
+    DRY_RUN_CODE: "No REST call made, probably using '--dry-run'"
+}
 
-SEND = 'send'
-CHECK = 'check'
-PB = 'pb'
+SEND, CHECK, PB = 'send', 'check', 'pb'
 SUBS = [SEND, CHECK, PB]
+
+
 def default(str_):
     return "(default '%s')" % str_
+
 PROG = os.path.basename(sys.argv[0])
 optspec = """
 %s [GENERAL-OPTIONS] %s [SPECIFIC-OPTIONS] <message...>
@@ -439,39 +442,47 @@ s,sender=     the sender to use
 b,phonebook=  the phonebook file %s
 e,expand      expand sender from the phonebook
 i,ignore      ignore errors when expanding receiver
-""" % tuple([PROG,'[' + ' | '.join(SUBS) + ']'] +
-        map(default, (DEFAULT_CONFIG_FILE,
-                      DEFAULTS[GATEWAY],
-                      DEFAULT_PHONE_BOOK)))
+""" % tuple([PROG, '[' + ' | '.join(SUBS) + ']'] +
+            map(default, (
+                DEFAULT_CONFIG_FILE,
+                DEFAULTS[GATEWAY],
+                DEFAULT_PHONE_BOOK)))
 parser = Options(optspec)
+
 
 def info(message):
     """ Informational messages. """
     if not QUIET:
         print "Info :\t%s" % message
 
+
 def warn(message):
     """ Warnings. """
     if not QUIET:
         print "Warn :\t%s" % message
+
 
 def debug(message):
     """ Debug messages """
     if DEBUG and not QUIET:
         print "Debug:\t%s" % message
 
+
 def fatal(message):
     """ Errors related to parsing. """
     parser.fatal(message)
+
 
 def error(message):
     """ General program errors. """
     print "Error:\t%s" % message
     sys.exit(2)
 
+
 class UnknownSettingError(Exception):
     """ Raised when an unknown setting is encounterd in a config file. """
     pass
+
 
 def open_config(config_filename):
     """ Open a config-file.
@@ -489,6 +500,7 @@ def open_config(config_filename):
     """
     config_filename = os.path.expanduser(config_filename)
     return open(config_filename)
+
 
 def parse_config(config_fp, section='settings'):
     """ Parse a configuration file with app settings.
@@ -520,7 +532,7 @@ def parse_config(config_fp, section='settings'):
         if key not in SETTINGS:
             raise UnknownSettingError(
                 "Setting '%s' from conf file '%s' not recognized!"
-                    % (key, config_fp.name))
+                % (key, config_fp.name))
     settings = {}
     for setting in SETTINGS:
         try:
@@ -531,6 +543,7 @@ def parse_config(config_fp, section='settings'):
         except ConfigParser.NoOptionError:
             pass
     return settings
+
 
 def parse_phonebook(phonebook_fp, section='contacts'):
     """ Parse the phonebook.
@@ -557,9 +570,10 @@ def parse_phonebook(phonebook_fp, section='contacts'):
     contacts = dict(cp.items(section))
     if DEBUG:
         debug("Phonebook at '%s' has the following entries:"
-            % phonebook_fp.name)
+              % phonebook_fp.name)
         print_phonebook(contacts, debug)
     return contacts
+
 
 def print_phonebook(contacts, print_):
     """ Print the phonebook contacts
@@ -571,8 +585,9 @@ def print_phonebook(contacts, print_):
         something to print with, e.g. debug
     """
     max_len = max(map(len, contacts.keys())) + 4
-    for name, number  in sorted(contacts.items()):
+    for name, number in sorted(contacts.items()):
         print_('%s : %s' % (name.ljust(max_len), number))
+
 
 def assemble_rest_call(function, parameters):
     """ Create a URL suitable for making a REST call to fullsms.de
@@ -595,6 +610,7 @@ def assemble_rest_call(function, parameters):
     debug("REST call string: '%s'" % call_string)
     return call_string
 
+
 def call(str_):
     """ Perform rest call and return (code, message). """
     if not DRY_RUN:
@@ -603,37 +619,42 @@ def call(str_):
     else:
         return DRY_RUN_CODE, str(DRY_RUN_CODE)
 
+
 def assemble_send_str(params):
     """ Turn params dict into URL for send. """
     return assemble_rest_call('', params)
+
 
 def assemble_check_str(params):
     """ Turn params dict into URL for check. """
     return assemble_rest_call('konto.php', params)
 
+
 def send(user=None,
-        password=None,
-        gateway=None,
-        receiver=None,
-        sender=None,
-        message=None):
+         password=None,
+         gateway=None,
+         receiver=None,
+         sender=None,
+         message=None):
     """ Implements send command. """
     parameters = {
-            'user': user,
-            'passwort': password,
-            'typ': gateway,
-            'handynr': receiver,
-            'absender': sender,
-            'text': message
-            }
+        'user': user,
+        'passwort': password,
+        'typ': gateway,
+        'handynr': receiver,
+        'absender': sender,
+        'text': message
+    }
     rest_str = assemble_rest_call('', parameters)
     return call(rest_str)
+
 
 def check(user, password):
     """ Implements check command. """
     params = {'user': user, 'passwort': password}
     str_ = assemble_check_str(params)
     return call(str_)
+
 
 def set_setting(setting, conf, cli):
     """ Extract the value for setting in order.
@@ -662,14 +683,15 @@ def set_setting(setting, conf, cli):
             prev_val, val = val, container[setting]
             if prev_val is not None:
                 debug("Value for '%s' found in '%s', overrides setting from '%s': '%s'"
-                        % (setting, desc, prev, val))
+                      % (setting, desc, prev, val))
             else:
                 debug("Value for '%s' found in '%s': '%s'"
-                        % (setting, desc, val))
+                      % (setting, desc, val))
         prev = desc
     if val is None:
         debug("No value for '%s' found anywhere" % setting)
     return val
+
 
 def check_gateway(str_):
     """ Ensure that the gateway is valid. """
@@ -678,13 +700,14 @@ def check_gateway(str_):
     except KeyError:
         raise ValueError("Gateway: '%s' is not defined." % str_)
 
+
 def check_sender(str_):
     """ Check sender format. """
     if not (re.search(r"^[0-9]{0,15}$", str(str_)) or
             re.search(r"^\w{0,15}$", str(str_))):
         raise ValueError(
-            "Sender should be 11 alphanumeric or 15 numeric characters, " +\
-                    "but was: '%s'" % str_)
+            "Sender should be 11 alphanumeric or 15 numeric characters, " +
+            "but was: '%s'" % str_)
 
 if __name__ == '__main__':
     (opt, flags, extra) = parser.parse(sys.argv[1:])
@@ -709,10 +732,10 @@ if __name__ == '__main__':
     # empty config_file pointer
     config_fp = None
     config_filename = opt.config if opt.config is not None \
-            else DEFAULT_CONFIG_FILE
+        else DEFAULT_CONFIG_FILE
     # settings dict with all None and empty params dict
     config_file_settings, params = \
-            dict((zip(SETTINGS, [None] * len(SETTINGS)))), {}
+        dict((zip(SETTINGS, [None] * len(SETTINGS)))), {}
     # try opening the config file
     try:
         config_fp = open_config(config_filename)
@@ -764,7 +787,7 @@ if __name__ == '__main__':
         else:
             result = int(result)
             error("Failed checking, error code: %d - %s"
-                    % (result, CODES[result]))
+                  % (result, CODES[result]))
     elif subcommand == SEND:
         # check the gateway argument
         try:
@@ -784,7 +807,7 @@ if __name__ == '__main__':
             fatal('No message to send')
         elif mess_len > gateway.limit:
             fatal("Message too long: '%d', gateway has max length: '%d'"
-                    % (mess_len, gateway.limit))
+                  % (mess_len, gateway.limit))
         params['message'] = mess
 
         # check the sender argument
@@ -833,4 +856,4 @@ if __name__ == '__main__':
             info('Send successful! (%d chars)' % mess_len)
         else:
             error('Failed sending, error code: %d - %s'
-                    % (result, CODES[result]))
+                  % (result, CODES[result]))
