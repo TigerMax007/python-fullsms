@@ -5,7 +5,7 @@
 # All rights reserved.
 #
 # (This license applies to all code in this file except options.py. The
-# options.py copy is included verbatim at the beginning of this file, it's
+# options.py copy is included verbatim at the beginning of this file, its
 # copyright is included and the copied parts are clearly marked)
 #
 # Redistribution and use in source and binary forms, with or without
