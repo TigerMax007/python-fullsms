@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright 2012 Valentin Haenel
+# Copyright 2012-2013 Valentin Haenel
 # All rights reserved.
 #
 # (This license applies to all code in this file except options.py. The

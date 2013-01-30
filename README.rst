@@ -360,7 +360,7 @@ Changelog
 Author and Copyright
 --------------------
 
-* ``fullsms.py`` is © 2012 Valentin Haenel, under a 2-Clause BSD license
+* ``fullsms.py`` is © 2012-2013 Valentin Haenel, under a 2-Clause BSD license
 * ``options.py`` is © 2010-2012 Avery Pennarun, under a 2-Clause BSD license
 
 ``options.py`` is included verbatim in the file ``fullsms.py`` to make
