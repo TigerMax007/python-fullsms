@@ -26,13 +26,13 @@ into trouble contact the author by email or via irc (``esc`` on ``freenode``).
 
   * Either clone the git repository with:
 
-    .. code:: shell
+    .. code:: console
 
         $ git clone git://github.com/esc/python-fullsms.git
 
   * Or do:
 
-    .. code:: shell
+    .. code:: console
 
         $ wget https://raw.github.com/esc/python-fullsms/master/fullsms.py
         $ cp fullsms.py sms && chmod +x sms
@@ -54,7 +54,7 @@ into trouble contact the author by email or via irc (``esc`` on ``freenode``).
   and configure IPs if you want.
 * Start sending SMS:
 
-  .. code:: shell
+  .. code:: console
 
       $ ./sms send -r 004901234567 "I really enjoy sending sms from the command line"
 
@@ -78,13 +78,13 @@ Synposis
 There are three subcommands ``pb`` to print the phonebook, ``check`` to check
 the account balance and ``send`` to send sms:
 
-.. code:: shell
+.. code:: console
 
     $ sms [GENERAL-OPTIONS] < check | send | pb > [SPECIFIC-OPTIONS]
 
 The specific invocations are:
 
-.. code:: shell
+.. code:: console
 
     $ sms -h
     $ sms -v
@@ -236,7 +236,7 @@ with appropriate entries has been defined.
 
 In the simplest case, only a receiver and message are required:
 
-.. code:: shell
+.. code:: console
 
     $ sms send -r maxine "Hello honey, I'm home"
 
@@ -246,7 +246,7 @@ to save you from typos. If you wish to supply the phone number on the command
 line, you need to use the  ``[-i | --ignore]`` option, which will ignore any
 errors caused by numbers not in the phone book:
 
-.. code:: shell
+.. code:: console
 
     $ sms send -i -r 0123456789 "Hello honey, I'm home"
 
@@ -257,7 +257,7 @@ Using the ``[-e | --expand]`` command-line option to expand the sender from the
 phonebook too, the following will send a message to ``maxine`` looking like it
 came from ``maximilian``:
 
-.. code:: shell
+.. code:: console
 
     $ sms send -r maxine -e -s maximilian "Any plans for tonight?"
 
@@ -270,21 +270,21 @@ gateway, see the ``fullsms.de`` documentation for details.
 The ``<message>`` is optional, since the ``send`` subcommand also accepts input
 on ``stdin``, for example by using a UNIX pipe:
 
-.. code:: shell
+.. code:: console
 
     $ echo "Any plans for tonight?" | sms send -r maxine
 
 Or, if you don't supply something, the script will wait for input, which you
 can terminate by sending ``EOF`` (``ctrl+d``):
 
-.. code:: shell
+.. code:: console
 
     $ sms send -r maxine
     Any plans for tonight? <ctrl+d>
 
 There is also the ``check`` subcommand to check account balance:
 
-.. code:: shell
+.. code:: console
 
     $ sms check
     The current balance for the account 'MaxMusterman' is: 12,571 €
@@ -292,14 +292,14 @@ There is also the ``check`` subcommand to check account balance:
 If you want only the amount, use the ``[-a | --amount]`` switch or the
 corresponding config file setting:
 
-.. code:: shell
+.. code:: console
 
     $ sms check -a
     12,571
 
 And finally, a ``pb`` subcommand to print the phonebook:
 
-.. code:: shell
+.. code:: console
 
     $ sms pb
     max           : 0123456789
@@ -308,7 +308,7 @@ And finally, a ``pb`` subcommand to print the phonebook:
 
 By convetion, a ``[-h | --help]`` option is provided:
 
-.. code:: shell
+.. code:: console
 
     $ sms -h
 
