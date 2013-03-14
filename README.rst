@@ -1,7 +1,7 @@
 Description
 ===========
 
-Send sms from the command line.
+Send SMS from the command line.
 
 A library and command line interface to the HTTP interface of `fullsms.de
 <http://fullsms.de>`_.
@@ -46,22 +46,22 @@ into trouble contact the author by email or via irc (``esc`` on ``freenode``).
       password  = maxmustermangeheim
       sender    = 0049123456789
 
-  and substitute the values ``user`` and ``password`` with your ``fullsms.de``
+  ... and substitute the values ``user`` and ``password`` with your ``fullsms.de``
   credentials, and ``sender`` with the phone number you would like to have the
   SMS appear to come from.
 
-* Activate the `HTTP-Interface <https://www.fullsms.de/frontend.html?do=schnittstelle_sms_http>`_
-  and configure IPs if you want.
+* Activate the `fullsms.de HTTP-Interface <https://www.fullsms.de/frontend.html?do=schnittstelle_sms_http>`_
+  for your account and configure IPs if you want.
 * Start sending SMS:
 
   .. code:: console
 
-      $ ./sms send -r 004901234567 "I really enjoy sending sms from the command line"
+      $ ./sms send -r 004901234567 "I really enjoy sending SMS from the command line"
 
   ... you have 0,50 € to try it out. If you like the service, buy some credits
   and continue to enjoy sending SMS from the command line.
-* Read the rest of this documentation to learn more about option for sending
-  and managing your phone-book.
+* Read the rest of this documentation to learn more about options for sending
+  and for managing your phonebook.
 
 ``fullsms.de`` Documentation
 ----------------------------
@@ -76,7 +76,7 @@ Synposis
 --------
 
 There are three subcommands ``pb`` to print the phonebook, ``check`` to check
-the account balance and ``send`` to send sms:
+the account balance and ``send`` to send SMS:
 
 .. code:: console
 
@@ -329,7 +329,7 @@ The ``python-fullsms`` can easily be used as a python module:
     (200 : 'OK')
 
     >>> fullsms.check(user=MaxMusterman, password=maxmustermangeheim)
-    (200, '12,571'
+    (200, '12,571')
 
 TODO
 ----
@@ -341,7 +341,7 @@ TODO
 Changelog
 ---------
 
-* v0.2.0 - XXXX-XX-XX
+* v0.2.0 - 2012-11-01
 
   * 'pb' subcommand to print the sorted phonebook
   * Fix a bug caused by change in upstream API
