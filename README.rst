@@ -306,7 +306,7 @@ And finally, a ``pb`` subcommand to print the phonebook:
     maximilian    : 2345678901
     maxine        : 1234567890
 
-By convetion, a ``[-h | --help]`` option is provided:
+By convention, a ``[-h | --help]`` option is provided:
 
 .. code:: console
 
