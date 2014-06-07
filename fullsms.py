@@ -480,7 +480,7 @@ def error(message):
 
 
 class UnknownSettingError(Exception):
-    """ Raised when an unknown setting is encounterd in a config file. """
+    """ Raised when an unknown setting is encountered in a config file. """
     pass
 
 
