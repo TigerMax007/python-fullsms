@@ -12,7 +12,7 @@ Note: this script makes use of Avery Pennarun's excellent
 Note: If you do not already have an account on ``fullsms.de``, please consider
 using the following link `https://www.fullsms.de/?ref=101584
 <https://www.fullsms.de/?ref=101584>`_ to register. This will credit the
-account of the author of ``python-fullsms`` with ``15,00 €``.
+account of the author of ``python-fullsms`` with ``5,00 €``.
 
 Quickstart
 ----------
